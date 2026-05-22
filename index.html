@@ -147,7 +147,20 @@ section{padding:100px 5vw;border-bottom:1px solid var(--border)}
 .content-stat{font-size:28px;font-family:var(--serif);color:var(--accent);margin-top:1.5rem}
 .content-stat-label{font-size:12px;color:var(--ink3);margin-top:4px;letter-spacing:0.06em;text-transform:uppercase}
 
-/* CONTACT */
+/* INTERACTIONS */
+.exp-item{transition:padding-left 0.25s, border-left 0.25s}
+.exp-item:hover{padding-left:1.5rem;border-left:3px solid var(--accent)}
+.content-card{transition:transform 0.25s, box-shadow 0.25s, background 0.25s}
+.content-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(25,42,85,0.08)}
+.research-card{transition:transform 0.25s}
+.research-card:hover{transform:translateY(-3px)}
+
+/* SCROLL FADE IN */
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+/* CARD POP IN */
+.card-pop{opacity:0;transform:scale(0.96) translateY(16px);transition:opacity 0.5s ease, transform 0.5s ease}
+.card-pop.visible{opacity:1;transform:scale(1) translateY(0)}
 .contact-inner{display:grid;grid-template-columns:3fr 2fr;gap:6rem;align-items:start}
 .contact-big{font-family:var(--serif);font-size:clamp(42px,6vw,72px);letter-spacing:-2px;line-height:1.0;margin-bottom:2rem}
 .contact-big em{font-style:italic;color:var(--accent)}
@@ -263,7 +276,7 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
   </div>
 </div>
 
-<section id="about">
+<section id="about" class="fade-in">
   <div class="section-header">
     <div>
       <p class="section-label">About</p>
@@ -314,7 +327,7 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
   </div>
 </section>
 
-<section id="experience">
+<section id="experience" class="fade-in">
   <div class="section-header">
     <div>
       <p class="section-label">Experience</p>
@@ -322,7 +335,7 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
     </div>
   </div>
   <div class="exp-list">
-    <div class="exp-item">
+    <div class="exp-item card-pop">
       <div class="exp-meta">
         <p class="exp-date">Summer 2026</p>
         <p class="exp-co">Barcelona, Spain</p>
@@ -338,7 +351,7 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
         </div>
       </div>
     </div>
-    <div class="exp-item">
+    <div class="exp-item card-pop">
       <div class="exp-meta">
         <p class="exp-date">May 2025 – Aug 2025</p>
         <p class="exp-co">Nashville, TN</p>
@@ -354,7 +367,7 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
         </div>
       </div>
     </div>
-    <div class="exp-item">
+    <div class="exp-item card-pop">
       <div class="exp-meta">
         <p class="exp-date">Nov 2024 – Feb 2025</p>
         <p class="exp-co">Austin, TX</p>
@@ -370,13 +383,13 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
         </div>
       </div>
     </div>
-    <div class="exp-item">
+    <div class="exp-item card-pop">
       <div class="exp-meta">
         <p class="exp-date">Jan 2025 – May 2025</p>
-        <p class="exp-co">Indiana University</p>
+        <p class="exp-co">Bloomington, IN</p>
       </div>
       <div>
-        <h3 class="exp-title">K201 Peer Tutor</h3>
+        <h3 class="exp-title">K201 Peer Tutor at Kelley School of Business</h3>
         <p class="exp-desc">Supported students in IU Kelley's core technology and analytics course, covering Excel, Access, and foundational data modeling concepts.</p>
         <div class="exp-skills">
           <span class="skill-chip">Excel</span>
@@ -389,14 +402,14 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
 </section>
 
 
-<section id="research">
+<section id="research" class="fade-in">
   <div class="section-header">
     <div>
       <p class="section-label">Research</p>
       <h2 class="section-title">Independent work</h2>
     </div>
   </div>
-  <div class="research-card">
+  <div class="research-card card-pop">
     <div>
       <div class="research-label">Working paper</div>
       <h3 class="research-title">The <em>ESG Shield</em></h3>
@@ -447,32 +460,32 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
   </div>
 </section>
 
-<section id="content">
+<section id="content" class="fade-in">
   <div class="section-header">
     <div>
       <p class="section-label">Content & Community</p>
       <h2 class="section-title">Beyond the classroom</h2></div>
   </div>
   <div class="content-grid">
-    <div class="content-card">
+    <div class="content-card card-pop">
       <h3 class="content-title">Stunnanomics</h3>
       <p class="content-desc">Independently scripting, filming, and editing 70+ short-form economics episodes covering business strategy and macroeconomic policy for a Gen Z audience. Growing across YouTube, LinkedIn, TikTok, and Instagram.</p>
       <div class="content-stat">500K+</div>
       <div class="content-stat-label">Cross-platform impressions</div>
     </div>
-    <div class="content-card">
+    <div class="content-card card-pop">
       <h3 class="content-title">Do More Run Club</h3>
       <p class="content-desc">In one year I ran 3.5 marathons including a World Major, not because I was built for it but because I believed I could do more. That belief became a club. Founded and scaled from inception to 150+ registrants at IU, executing the inaugural Miles for Matt 5K and spearheading $15,000+ in fundraising for the Miles for Matt nonprofit.</p>
       <div class="content-stat">$15K+</div>
       <div class="content-stat-label">Raised for Miles for Matt</div>
     </div>
-    <div class="content-card">
+    <div class="content-card card-pop">
       <h3 class="content-title">Nations Ministry Center</h3>
       <p class="content-desc">Since 2022, volunteered regularly at Nations Ministry Center in Nashville and whenever back from school, working with children from underserved communities through tutoring and mentoring. Over 70 hours logged and counting.</p>
       <div class="content-stat">70+</div>
       <div class="content-stat-label">Hours with Nashville youth since 2022</div>
     </div>
-    <div class="content-card">
+    <div class="content-card card-pop">
       <h3 class="content-title">Nitara Consulting</h3>
       <p class="content-desc">Serving as VP of Consulting, leading weekly case-based workshops on market structure, corporate strategy, and competitive dynamics across 4 active client-facing project teams. Mentoring 30+ consultants on case fundamentals and recruiting preparation.</p>
       <div class="content-stat">30+</div>
@@ -514,5 +527,23 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
   <span class="footer-copy">© 2026 · Made with intention</span>
 </footer>
 
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') })
+}, {threshold: 0.08})
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el))
+
+const cardObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      const siblings = Array.from(e.target.parentElement.children)
+      const index = siblings.indexOf(e.target)
+      e.target.style.transitionDelay = (index * 0.1) + 's'
+      e.target.classList.add('visible')
+    }
+  })
+}, {threshold: 0.1})
+document.querySelectorAll('.card-pop').forEach(el => cardObserver.observe(el))
+</script>
 </body>
 </html>

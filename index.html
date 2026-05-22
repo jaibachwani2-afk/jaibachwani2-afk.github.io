@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Jai · Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#F7F4EF;
+  --ink:#1A1714;
+  --ink2:#4A4641;
+  --ink3:#8A8480;
+  --accent:#192a55;
+  --accent2:#4a6fa5;
+  --border:rgba(26,23,20,0.12);
+  --serif:'DM Serif Display',serif;
+  --sans:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:64px}
+.nav-logo{font-family:var(--serif);font-size:22px;letter-spacing:-0.5px;color:var(--ink)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2);transition:color 0.2s}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);text-decoration:none;border-bottom:1.5px solid var(--accent);padding-bottom:1px;transition:opacity 0.2s}
+.nav-cta:hover{opacity:0.7}
+
+/* HERO */
+.hero{min-height:92vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:0 5vw;gap:4rem;border-bottom:1px solid var(--border)}
+.hero-left{padding-right:2rem}
+.hero-eyebrow{font-size:12px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem}
+.hero-title{font-family:var(--serif);font-size:clamp(52px,7vw,88px);line-height:1.0;letter-spacing:-2px;color:var(--ink);margin-bottom:1.5rem}
+.hero-title em{font-style:italic;color:var(--accent)}
+.hero-sub{font-size:17px;font-weight:300;color:var(--ink2);line-height:1.7;max-width:420px;margin-bottom:2.5rem}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:2.5rem}
+.tag{font-size:12px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;padding:6px 14px;border:1px solid var(--border);border-radius:100px;color:var(--ink2)}
+.hero-actions{display:flex;align-items:center;gap:1.5rem}
+.btn-primary{display:inline-block;padding:14px 32px;background:var(--ink);color:var(--cream);font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;border-radius:3px;transition:background 0.2s}
+.btn-primary:hover{background:var(--accent)}
+.btn-ghost{font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2);text-decoration:none;transition:color 0.2s}
+.btn-ghost:hover{color:var(--ink)}
+.hero-right{position:relative;display:flex;align-items:center;justify-content:center}
+.hero-card{background:var(--ink);color:var(--cream);padding:3rem;border-radius:4px;width:100%;max-width:420px}
+.hero-card-label{font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:2rem;display:flex;align-items:center;gap:8px}
+.hero-card-label::before{content:'';display:block;width:24px;height:1px;background:var(--accent2)}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.stat-num{font-family:var(--serif);font-size:42px;line-height:1;margin-bottom:6px;color:var(--cream)}
+.stat-label{font-size:12px;color:rgba(247,244,239,0.5);letter-spacing:0.05em;line-height:1.4}
+.hero-card-divider{height:1px;background:rgba(247,244,239,0.12);margin:2rem 0}
+.hero-card-bottom{font-size:13px;color:rgba(247,244,239,0.6);font-style:italic;font-family:var(--serif)}
+
+/* MARQUEE */
+.marquee-bar{border-bottom:1px solid var(--border);padding:14px 0;overflow:hidden;white-space:nowrap}
+.marquee-inner{display:inline-flex;gap:3rem;animation:marquee 18s linear infinite}
+.marquee-item{font-size:12px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink3);display:flex;align-items:center;gap:12px}
+.marquee-dot{width:4px;height:4px;border-radius:50%;background:var(--accent)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+section{padding:100px 5vw;border-bottom:1px solid var(--border)}
+.section-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:60px}
+.section-label{font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent)}
+.section-title{font-family:var(--serif);font-size:clamp(36px,5vw,56px);letter-spacing:-1.5px;line-height:1.05;margin-top:12px}
+.section-link{font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:2px;transition:color 0.2s,border-color 0.2s}
+.section-link:hover{color:var(--accent);border-color:var(--accent)}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:5fr 4fr;gap:6rem;align-items:start}
+.about-text p{font-size:19px;font-weight:300;color:var(--ink2);line-height:1.75;margin-bottom:1.5rem}
+.about-text p strong{font-weight:500;color:var(--ink)}
+.about-sidebar{padding-top:8px}
+.sidebar-block{margin-bottom:2.5rem}
+.sidebar-block-label{font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink3);margin-bottom:12px}
+.sidebar-block-item{font-size:14px;color:var(--ink2);padding:8px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.sidebar-block-item:last-child{border-bottom:none}
+.item-badge{font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);padding:3px 10px;border:1px solid rgba(25,42,85,0.3);border-radius:100px}
+
+/* EXPERIENCE */
+.exp-list{display:flex;flex-direction:column;gap:0}
+.exp-item{display:grid;grid-template-columns:180px 1fr;gap:3rem;padding:3rem 0;border-bottom:1px solid var(--border)}
+.exp-item:first-child{padding-top:0}
+.exp-meta{padding-top:4px}
+.exp-date{font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
+.exp-co{font-size:13px;color:var(--ink2)}
+.exp-title{font-family:var(--serif);font-size:26px;letter-spacing:-0.5px;margin-bottom:12px}
+.exp-desc{font-size:15px;color:var(--ink2);line-height:1.7;font-weight:300}
+.exp-skills{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.skill-chip{font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);padding:4px 12px;border:1px solid var(--border);border-radius:100px}
+
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.proj-card{padding:3rem;background:var(--cream);border:1px solid var(--border);position:relative;overflow:hidden;transition:background 0.25s}
+.proj-card:hover{background:#EDE9E2}
+.proj-card-accent{position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);opacity:0;transition:opacity 0.25s}
+.proj-card:hover .proj-card-accent{opacity:1}
+.proj-num{font-family:var(--serif);font-size:48px;color:rgba(26,23,20,0.08);position:absolute;top:1.5rem;right:2rem;line-height:1}
+.proj-category{font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.proj-title{font-family:var(--serif);font-size:24px;letter-spacing:-0.5px;margin-bottom:1rem;line-height:1.2}
+.proj-desc{font-size:14px;color:var(--ink2);line-height:1.7;font-weight:300}
+.proj-arrow{display:inline-block;font-size:20px;color:var(--ink3);margin-top:1.5rem;transition:transform 0.2s,color 0.2s}
+.proj-card:hover .proj-arrow{transform:translateX(6px);color:var(--accent)}
+
+/* RESEARCH */
+.research-card{background:var(--ink);color:var(--cream);padding:4rem;border-radius:4px;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.research-label{font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:1rem;display:flex;align-items:center;gap:10px}
+.research-label::before{content:'';display:block;width:20px;height:1px;background:var(--accent2)}
+.research-title{font-family:var(--serif);font-size:clamp(28px,3.5vw,40px);letter-spacing:-1px;line-height:1.1;margin-bottom:1.5rem}
+.research-title em{font-style:italic;color:var(--accent2)}
+.research-body{font-size:15px;color:rgba(247,244,239,0.65);font-weight:300;line-height:1.8}
+.research-meta{border-top:1px solid rgba(247,244,239,0.15);padding-top:1.5rem;margin-top:1.5rem}
+.research-meta-item{display:flex;align-items:baseline;gap:12px;margin-bottom:10px;font-size:13px}
+.research-meta-label{color:rgba(247,244,239,0.4);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;min-width:80px}
+.research-meta-val{color:rgba(247,244,239,0.8)}
+.research-right{display:flex;flex-direction:column;gap:1.5rem}
+.research-hypothesis{padding:2rem;border:1px solid rgba(247,244,239,0.15);border-radius:4px}
+.research-hyp-label{font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:12px}
+.research-hyp-text{font-family:var(--serif);font-size:18px;font-style:italic;color:var(--cream);line-height:1.5}
+.research-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.r-stat{padding:1.5rem;background:rgba(247,244,239,0.05);border-radius:3px}
+.r-stat-num{font-family:var(--serif);font-size:32px;color:var(--cream);line-height:1;margin-bottom:4px}
+.r-stat-label{font-size:12px;color:rgba(247,244,239,0.45);line-height:1.4}
+
+/* CONTENT */
+.content-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.content-card{padding:2.5rem;border:1px solid var(--border)}
+.content-icon{font-size:28px;margin-bottom:1.5rem}
+.content-title{font-family:var(--serif);font-size:20px;margin-bottom:12px;letter-spacing:-0.3px}
+.content-desc{font-size:14px;color:var(--ink2);line-height:1.7;font-weight:300}
+.content-stat{font-size:28px;font-family:var(--serif);color:var(--accent);margin-top:1.5rem}
+.content-stat-label{font-size:12px;color:var(--ink3);margin-top:4px;letter-spacing:0.06em;text-transform:uppercase}
+
+/* CONTACT */
+.contact-inner{display:grid;grid-template-columns:3fr 2fr;gap:6rem;align-items:start}
+.contact-big{font-family:var(--serif);font-size:clamp(42px,6vw,72px);letter-spacing:-2px;line-height:1.0;margin-bottom:2rem}
+.contact-big em{font-style:italic;color:var(--accent)}
+.contact-sub{font-size:16px;color:var(--ink2);font-weight:300;line-height:1.7;margin-bottom:2.5rem;max-width:400px}
+.contact-links{display:flex;flex-direction:column;gap:0}
+.contact-link-item{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 0;border-bottom:1px solid var(--border);text-decoration:none;color:var(--ink);transition:padding-left 0.2s}
+.contact-link-item:hover{padding-left:8px;color:var(--accent)}
+.contact-link-name{font-size:15px;font-weight:500}
+.contact-link-handle{font-size:13px;color:var(--ink3)}
+.contact-arrow{font-size:18px;color:var(--ink3)}
+.contact-note{padding:2.5rem;background:var(--ink);color:var(--cream);border-radius:4px}
+.contact-note-label{font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:1.5rem}
+.contact-note-text{font-family:var(--serif);font-size:20px;font-style:italic;line-height:1.5;color:var(--cream);margin-bottom:1.5rem}
+.contact-note-sub{font-size:13px;color:rgba(247,244,239,0.5);line-height:1.6}
+
+/* FOOTER */
+footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-between}
+.footer-name{font-family:var(--serif);font-size:18px;color:var(--ink3)}
+.footer-copy{font-size:12px;color:var(--ink3);letter-spacing:0.06em}
+
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr;min-height:auto;padding:80px 5vw}
+  .hero-right{display:none}
+  .about-grid,.contact-inner,.research-card{grid-template-columns:1fr;gap:2.5rem}
+  .proj-grid,.content-grid{grid-template-columns:1fr}
+  .exp-item{grid-template-columns:1fr;gap:0.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Jai Bachwani</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#content">Content & Community</a></li>
+  </ul>
+  <a href="mailto:jaibachw@iu.edu" class="nav-cta">Get in touch →</a>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Barcelona · Nashville · Bloomington</p>
+    <h1 class="hero-title">Strategy.<br>Data.<br><em>Impact.</em></h1>
+    <p class="hero-sub">Business analyst and consultant turning complex economic signals into decisions that move the needle. Working with startups, nonprofits, and the next generation of leaders.</p>
+    <div class="hero-tags">
+      <span class="tag">Business Analytics</span>
+      <span class="tag">Economic Research</span>
+      <span class="tag">Strategy Consulting</span>
+      <span class="tag">Microeconomic Consulting</span>
+      <span class="tag">Economics Writing</span>
+      <span class="tag">ESG Consulting</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card">
+      <p class="hero-card-label">At a glance</p>
+      <div class="stat-grid">
+        <div>
+          <div class="stat-num">3.84</div>
+          <div class="stat-label">GPA · Founders Scholar 2x awarded</div>
+        </div>
+        <div>
+          <div class="stat-num">3</div>
+          <div class="stat-label">Marathons completed, incl. LA 2026</div>
+        </div>
+        <div>
+          <div class="stat-num">500K+</div>
+          <div class="stat-label">Aggregate impressions, Stunnanomics</div>
+        </div>
+        <div>
+          <div class="stat-num">70</div>
+          <div class="stat-label">Firms in current ESG rate-shock study</div>
+        </div>
+      </div>
+      <div class="hero-card-divider"></div>
+      <p class="hero-card-bottom">"Strategy without data is just opinion. Data without strategy is just noise."</p>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-bar">
+  <div class="marquee-inner">
+    <span class="marquee-item">IU Kelley · Junior <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Barcelona <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Nashville <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Bloomington <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Cribdata · Business Analyst <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Nitara Consulting · VP <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Do More Run Club · Founder <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Miles for Matt 5K <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Stunnanomics · Economics Creator <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Founders Scholar <span class="marquee-dot"></span></span>
+    <span class="marquee-item">3x Marathoner <span class="marquee-dot"></span></span>
+    <span class="marquee-item">IU Kelley · Junior <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Barcelona <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Nashville <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Bloomington <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Cribdata · Business Analyst <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Nitara Consulting · VP <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Do More Run Club · Founder <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Miles for Matt 5K <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Stunnanomics · Economics Creator <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Founders Scholar <span class="marquee-dot"></span></span>
+    <span class="marquee-item">3x Marathoner <span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="section-header">
+    <div>
+      <p class="section-label">About</p>
+      <h2 class="section-title">More than a résumé</h2>
+    </div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Junior at <strong>Indiana University's Kelley School of Business</strong>, triple-majoring in Economic Consulting, Business Analytics, and Sustainable Business. Focused on ESG, economics, policy, and business strategy.</p>
+      <p>Currently serving as Business Analyst at <strong>Cribdata</strong> in Barcelona and VP of Consulting at <strong>Nitara</strong>. Previously led Lighthouse Advisory, a cross-university pro bono consulting group. Conducting independent research on ESG investment profiles and asymmetric monetary policy exposure using event study methodology and high-frequency Fed surprise measures.</p>
+      <p>Founder of Do More Run Club at IU. Completed 3.5 marathons in one year including a World Major. Since 2022 I've volunteered weekly at <strong>Nations Ministry Center</strong> in Nashville, logging 70+ hours with children from underserved communities.</p>
+    </div>
+    <div class="about-sidebar">
+      <div class="sidebar-block">
+        <p class="sidebar-block-label">Education</p>
+        <div class="sidebar-block-item">
+          <span>Indiana University, Kelley</span>
+          <span class="item-badge">Junior</span>
+        </div>
+        <div class="sidebar-block-item"><span>Economic Consulting</span></div>
+        <div class="sidebar-block-item"><span>Business Analytics</span></div>
+        <div class="sidebar-block-item"><span>Sustainable Business</span></div>
+      </div>
+      <div class="sidebar-block">
+        <p class="sidebar-block-label">Tools</p>
+        <div class="sidebar-block-item"><span>Excel · Power BI · Access</span></div>
+        <div class="sidebar-block-item"><span>CRSP / WRDS</span></div>
+        <div class="sidebar-block-item"><span>R</span></div>
+      </div>
+      <div class="sidebar-block">
+        <p class="sidebar-block-label">Awards</p>
+        <div class="sidebar-block-item">
+          <span>Founders Scholar</span>
+          <span class="item-badge">2× Won</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-header">
+    <div>
+      <p class="section-label">Experience</p>
+      <h2 class="section-title">Where I've worked</h2>
+    </div>
+  </div>
+  <div class="exp-list">
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-date">Summer 2026</p>
+        <p class="exp-co">Barcelona, Spain</p>
+      </div>
+      <div>
+        <h3 class="exp-title">Strategy and Business Analyst Intern at Cribdata</h3>
+        <p class="exp-desc">Selected to intern at a Barcelona-based startup monetizing personal data within GDPR-compliant frameworks. Supporting internal strategy and working on client development within the European data-privacy market.</p>
+        <div class="exp-skills">
+          <span class="skill-chip">Strategy</span>
+          <span class="skill-chip">Client Development</span>
+          <span class="skill-chip">GDPR</span>
+          <span class="skill-chip">Data Privacy</span>
+        </div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-date">May 2025 – Aug 2025</p>
+        <p class="exp-co">Nashville, TN</p>
+      </div>
+      <div>
+        <h3 class="exp-title">Investor Relations Intern at JRG Innovative Concepts</h3>
+        <p class="exp-desc">Managed investor relations pipeline across active residential development projects, conducting preliminary due diligence and coordinating with prospective LPs to advance capital raises. Underwrote $130M+ in live residential development deals and produced institutional-quality investor memos. Built an AI tool to automate future deal underwriting and supported active investor negotiations through LP correspondence and site visit coordination.</p>
+        <div class="exp-skills">
+          <span class="skill-chip">Investor Relations</span>
+          <span class="skill-chip">Due Diligence</span>
+          <span class="skill-chip">Real Estate</span>
+          <span class="skill-chip">Financial Modeling</span>
+        </div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-date">Nov 2024 – Feb 2025</p>
+        <p class="exp-co">Austin, TX</p>
+      </div>
+      <div>
+        <h3 class="exp-title">Business Development Intern at Homebldr</h3>
+        <p class="exp-desc">Designed and deployed an automated email outreach system using Zapier to replace manual workflows, building infrastructure to scale outreach capacity. Recommended a lead prioritization strategy ranking prospects by borrower acquisition likelihood and deal size to maximize conversion potential.</p>
+        <div class="exp-skills">
+          <span class="skill-chip">Automation</span>
+          <span class="skill-chip">Zapier</span>
+          <span class="skill-chip">Lead Strategy</span>
+          <span class="skill-chip">Proptech</span>
+        </div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-date">Jan 2025 – May 2025</p>
+        <p class="exp-co">Indiana University</p>
+      </div>
+      <div>
+        <h3 class="exp-title">K201 Peer Tutor</h3>
+        <p class="exp-desc">Supporting students in IU Kelley's core technology and analytics course, covering Excel, Access, and foundational data modeling concepts.</p>
+        <div class="exp-skills">
+          <span class="skill-chip">Excel</span>
+          <span class="skill-chip">Access</span>
+          <span class="skill-chip">Teaching</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="research">
+  <div class="section-header">
+    <div>
+      <p class="section-label">Research</p>
+      <h2 class="section-title">Independent work</h2>
+    </div>
+  </div>
+  <div class="research-card">
+    <div>
+      <div class="research-label">Working paper</div>
+      <h3 class="research-title">The <em>ESG Shield</em></h3>
+      <p class="research-body">Do high-ESG firms absorb rate surprises differently than their low-ESG peers? This event study tests whether institutional investor behavior concentrated in long-horizon ESG-mandated capital creates an asymmetric buffer during contractionary monetary policy shocks, while also creating outsized vulnerability to forward guidance changes.</p>
+      <div class="research-meta">
+        <div class="research-meta-item">
+          <span class="research-meta-label">Data</span>
+          <span class="research-meta-val">CRSP / WRDS, S&P 500</span>
+        </div>
+        <div class="research-meta-item">
+          <span class="research-meta-label">Method</span>
+          <span class="research-meta-val">Event study · Bauer-Swanson MPS decomposition</span>
+        </div>
+        <div class="research-meta-item">
+          <span class="research-meta-label">Period</span>
+          <span class="research-meta-val">2010 – 2023</span>
+        </div>
+        <div class="research-meta-item">
+          <span class="research-meta-label">Status</span>
+          <span class="research-meta-val">In progress</span>
+        </div>
+      </div>
+    </div>
+    <div class="research-right">
+      <div class="research-hypothesis">
+        <p class="research-hyp-label">Core hypothesis</p>
+        <p class="research-hyp-text">"High-ESG firms are buffered during rate surprises but more exposed to forward guidance shocks due to long-horizon institutional ownership."</p>
+      </div>
+      <div class="research-stats">
+        <div class="r-stat">
+          <div class="r-stat-num">70</div>
+          <div class="r-stat-label">S&P 500 firms in sample</div>
+        </div>
+        <div class="r-stat">
+          <div class="r-stat-num">13yr</div>
+          <div class="r-stat-label">Time horizon studied</div>
+        </div>
+        <div class="r-stat">
+          <div class="r-stat-num">2</div>
+          <div class="r-stat-label">Shock types identified</div>
+        </div>
+        <div class="r-stat">
+          <div class="r-stat-num">MPS</div>
+          <div class="r-stat-label">Bauer-Swanson measure</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="content">
+  <div class="section-header">
+    <div>
+      <p class="section-label">Content & Community</p>
+    </div>
+  </div>
+  <div class="content-grid">
+    <div class="content-card">
+      <h3 class="content-title">Stunnanomics</h3>
+      <p class="content-desc">Independently scripting, filming, and editing 70+ short-form economics episodes covering business strategy and macroeconomic policy for a Gen Z audience. Growing across YouTube, LinkedIn, TikTok, and Instagram.</p>
+      <div class="content-stat">500K+</div>
+      <div class="content-stat-label">Cross-platform impressions</div>
+    </div>
+    <div class="content-card">
+      <h3 class="content-title">Do More Run Club</h3>
+      <p class="content-desc">In one year I ran 3.5 marathons including a World Major, not because I was built for it but because I believed I could do more. That belief became a club. Founded and scaled from inception to 150+ registrants at IU, executing the inaugural Miles for Matt 5K and spearheading $15,000+ in fundraising for the Miles for Matt nonprofit.</p>
+      <div class="content-stat">$15K+</div>
+      <div class="content-stat-label">Raised for Miles for Matt</div>
+    </div>
+    <div class="content-card">
+      <h3 class="content-title">Nations Ministry Center</h3>
+      <p class="content-desc">Since getting my driver's license in 2022, I've shown up every week I'm in Nashville to work with children from underserved communities through Nations Ministry Center. Tutoring, mentoring, and just being a consistent presence. Over 70 hours in and still going every time I'm back from school.</p>
+      <div class="content-stat">70+</div>
+      <div class="content-stat-label">Hours with Nashville youth since 2022</div>
+    </div>
+    <div class="content-card">
+      <h3 class="content-title">Nitara Consulting</h3>
+      <p class="content-desc">Serving as VP of Consulting, leading weekly case-based workshops on market structure, corporate strategy, and competitive dynamics across 4 active client-facing project teams. Mentoring 30+ consultants on case fundamentals and recruiting preparation.</p>
+      <div class="content-stat">30+</div>
+      <div class="content-stat-label">Consultants mentored</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="border-bottom:none">
+  <div class="contact-inner">
+    <div>
+      <h2 class="contact-big">Let's build<br>something <em>real.</em></h2>
+      <p class="contact-sub">Whether you're hiring, collaborating on research, building a company, or just want to talk strategy and economics, my inbox is open.</p>
+      <div class="contact-links">
+        <a href="mailto:jaibachw@iu.edu" class="contact-link-item">
+          <div><div class="contact-link-name">Email</div><div class="contact-link-handle">jaibachw@iu.edu</div></div>
+          <span class="contact-arrow">↗</span>
+        </a>
+        <a href="https://www.linkedin.com/in/jai-bachwani/" class="contact-link-item">
+          <div><div class="contact-link-name">LinkedIn</div><div class="contact-link-handle">linkedin.com/in/jai-bachwani</div></div>
+          <span class="contact-arrow">↗</span>
+        </a>
+        <a href="https://instagram.com" class="contact-link-item">
+          <div><div class="contact-link-name">Stunnanomics</div><div class="contact-link-handle">@stunnanomics</div></div>
+          <span class="contact-arrow">↗</span>
+        </a>
+      </div>
+    </div>
+    <div class="contact-note">
+      <p class="contact-note-label">Currently</p>
+      <p class="contact-note-text">"Building in Barcelona. Researching in Bloomington. Running everywhere in between."</p>
+      <p class="contact-note-sub">Business Analyst Intern at Cribdata · Kelley School of Business · Available for consulting, research collaboration, and full-time roles starting 2027.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-name">Jai Bachwani</span>
+  <span class="footer-copy">© 2026 · Made with intention</span>
+</footer>
+
+</body>
+</html>

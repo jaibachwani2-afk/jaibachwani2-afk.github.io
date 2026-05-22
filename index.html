@@ -65,7 +65,7 @@ nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px 
 .stat-num{font-family:var(--serif);font-size:42px;line-height:1;margin-bottom:6px;color:var(--cream)}
 .stat-label{font-size:12px;color:rgba(247,244,239,0.5);letter-spacing:0.05em;line-height:1.4}
 .hero-card-divider{height:1px;background:rgba(247,244,239,0.12);margin:2rem 0}
-.hero-card-bottom{font-size:13px;color:rgba(247,244,239,0.6);font-style:italic;font-family:var(--serif)}
+.hero-card-bottom{font-size:15px;color:var(--cream);font-style:italic;font-family:var(--serif);text-align:center;line-height:1.6}
 
 /* MARQUEE */
 .marquee-bar{border-bottom:1px solid var(--border);padding:14px 0;overflow:hidden;white-space:nowrap}
@@ -183,7 +183,8 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
 
 @media(max-width:768px){
   .hero{grid-template-columns:1fr;min-height:auto;padding:80px 5vw}
-  .hero-right{display:none}
+  .hero-right{display:flex;margin-top:2rem}
+  .hero-card{max-width:100%}
   .about-grid,.contact-inner,.research-card{grid-template-columns:1fr;gap:2.5rem}
   .proj-grid,.content-grid{grid-template-columns:1fr}
   .exp-item{grid-template-columns:1fr;gap:0.5rem}
@@ -232,7 +233,7 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
         </div>
         <div>
           <div class="stat-num">3</div>
-          <div class="stat-label">Marathons completed, incl. LA 2026</div>
+          <div class="stat-label">Marathons completed in one year, incl. LA 2026</div>
         </div>
         <div>
           <div class="stat-num">500K+</div>
@@ -288,7 +289,7 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
       <p>A junior at <strong>Indiana University's Kelley School of Business</strong>, triple-majoring in Economic Consulting, Business Analytics, and Sustainable Business. Focused on ESG, economics, policy, and business strategy.</p>
       <p>Currently serving as a Business Analyst at <strong>Cribdata</strong> in Barcelona and VP of Consulting at <strong>Nitara</strong>. Previously led Lighthouse Advisory, a cross-university pro bono consulting group. Conducting independent research on ESG investment profiles and asymmetric monetary policy exposure using event study methodology and high-frequency Fed surprise measures.</p>
       <p>Founder of Do More Run Club at IU. Completed 3.5 marathons in one year including the LA Marathon. Volunteered at <strong>Nations Ministry Center</strong> in Nashville since 2022, returning every school break to tutor and mentor children from underserved communities.</p>
-      <p>The thread across all of it is a simple mission: help build a world where businesses create lasting impact alongside strong returns. That means better decisions, more honest risk pricing, and firms that leave things better than they found them. Both my parents are physicians. Growing up watching them dedicate their lives to making people better shaped how my work gets approached. The goal is the same, just at the scale of institutions and policy.</p>
+      <p>The thread across all of it is a simple mission: help build a world where businesses create lasting impact alongside strong returns. That means better decisions, more honest risk pricing, and firms that leave things better than they found them. Both my parents are physicians. Growing up watching them dedicate their lives to making people better shaped how I approach work. The goal is the same, just at the scale of institutions and policy.</p>
     </div>
     <div class="about-sidebar">
       <div class="sidebar-block">
@@ -342,7 +343,7 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
       </div>
       <div>
         <h3 class="exp-title">Strategy and Business Analyst Intern at Cribdata</h3>
-        <p class="exp-desc">Selected to intern at a Barcelona-based startup monetizing personal data within GDPR-compliant frameworks. Supporting internal strategy and working on client development within the European data-privacy market.</p>
+        <p class="exp-desc">Selected to intern at a Barcelona-based startup building GDPR-compliant consent and data infrastructure. Supporting internal strategy and working on client development within the European data-privacy market.</p>
         <div class="exp-skills">
           <span class="skill-chip">Strategy</span>
           <span class="skill-chip">Client Development</span>

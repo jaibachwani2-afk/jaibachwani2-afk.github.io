@@ -163,7 +163,15 @@ section{padding:100px 5vw;border-bottom:1px solid var(--border)}
 .content-stat{font-size:28px;font-family:var(--serif);color:var(--accent);margin-top:1.5rem}
 .content-stat-label{font-size:12px;color:var(--ink3);margin-top:4px;letter-spacing:0.06em;text-transform:uppercase}
 
-/* INTERACTIONS */
+/* SUMMER NUMBERED */
+.summer-numbered-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.summer-num-card{position:relative;padding:2.5rem;border:1px solid var(--border);background:var(--cream);overflow:hidden;transition:background 0.25s,transform 0.25s}
+.summer-num-card:hover{background:#EDE9E2;transform:translateY(-3px)}
+.summer-num{position:absolute;top:-10px;right:16px;font-family:var(--serif);font-size:96px;color:rgba(25,42,85,0.06);line-height:1;pointer-events:none;user-select:none}
+.summer-num-tag{font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.summer-num-title{font-family:var(--serif);font-size:20px;letter-spacing:-0.3px;margin-bottom:0.75rem;line-height:1.2;color:var(--ink)}
+.summer-num-desc{font-size:14px;color:var(--ink2);line-height:1.7;font-weight:300}
+@media(max-width:768px){.summer-numbered-grid{grid-template-columns:1fr}}
 .exp-item{transition:padding-left 0.25s, border-left 0.25s}
 .exp-item:hover{padding-left:1.5rem;border-left:3px solid var(--accent)}
 .content-card{transition:transform 0.25s, box-shadow 0.25s, background 0.25s}
@@ -219,6 +227,7 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
+    <li><a href="#summer">Summer 2026</a></li>
     <li><a href="#research">Research</a></li>
     <li><a href="#content">Content & Community</a></li>
   </ul>
@@ -418,6 +427,46 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
   </div>
 </section>
 
+<section id="summer" class="fade-in">
+  <div class="section-header">
+    <div>
+      <p class="section-label">Summer 2026</p>
+      <h2 class="section-title">What's happening now</h2>
+    </div>
+  </div>
+  <div class="summer-numbered-grid">
+    <div class="summer-num-card card-pop">
+      <span class="summer-num">01</span>
+      <div class="summer-num-tag">Barcelona · Internship</div>
+      <h3 class="summer-num-title">Strategy and Business Analyst at Cribdata</h3>
+      <p class="summer-num-desc">Embedded with the Cribdata team in Barcelona, improving consent-first infrastructure that enables companies to securely acquire, govern, and activate personal data in real time across GDPR environments. Work spans machine-readable consent design, policy enforcement, and auditable AI and data workflows, alongside internal strategy and client development.</p>
+    </div>
+    <div class="summer-num-card card-pop">
+      <span class="summer-num">02</span>
+      <div class="summer-num-tag">Research · Independent</div>
+      <h3 class="summer-num-title">The Retreat of Capital</h3>
+      <p class="summer-num-desc">Advancing an empirical paper testing whether New Markets Tax Credit investment reversed banking desert formation across U.S. census tracts between 2010 and 2019, using difference-in-differences methodology and FDIC branch-level panel data.</p>
+    </div>
+    <div class="summer-num-card card-pop">
+      <span class="summer-num">03</span>
+      <div class="summer-num-tag">Kelley · Coursework</div>
+      <h3 class="summer-num-title">BUS-X 480</h3>
+      <p class="summer-num-desc">Enrolled in 6 credit hours at Kelley School of Business alongside the Barcelona internship, maintaining academic progress through the summer term.</p>
+    </div>
+    <div class="summer-num-card card-pop">
+      <span class="summer-num">04</span>
+      <div class="summer-num-tag">LinkedIn Learning · Certificate</div>
+      <h3 class="summer-num-title">Excel for Business Analytics</h3>
+      <p class="summer-num-desc">Deepening applied Excel skills for business analytics contexts, covering advanced modeling, data analysis, and visualization techniques relevant to consulting and research work.</p>
+    </div>
+    <div class="summer-num-card card-pop">
+      <span class="summer-num">05</span>
+      <div class="summer-num-tag">UPenn · Specialization</div>
+      <h3 class="summer-num-title">AI for Business Specialization</h3>
+      <p class="summer-num-desc">Completing the University of Pennsylvania AI for Business Specialization via Coursera, covering how AI tools and frameworks apply to strategy, operations, and decision-making in modern organizations.</p>
+    </div>
+  </div>
+</section>
 
 <section id="research" class="fade-in">
   <div class="section-header">

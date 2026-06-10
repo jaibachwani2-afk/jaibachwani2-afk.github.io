@@ -93,26 +93,27 @@ nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px 
 /* Color codes */
 .type-run .flip-front{background:#192a55;color:#F7F4EF}
 .type-run .flip-back{background:#192a55;color:#F7F4EF}
-.type-swim .flip-front{background:#1a5276;color:#F7F4EF}
-.type-swim .flip-back{background:#1a5276;color:#F7F4EF}
-.type-bike .flip-front{background:#154360;color:#F7F4EF}
-.type-bike .flip-back{background:#154360;color:#F7F4EF}
-.type-strength .flip-front{background:#4a235a;color:#F7F4EF}
-.type-strength .flip-back{background:#4a235a;color:#F7F4EF}
-.type-combo .flip-front{background:#1a3a4a;color:#F7F4EF}
-.type-combo .flip-back{background:#1a3a4a;color:#F7F4EF}
+.type-swim .flip-front{background:#0e6b8a;color:#F7F4EF}
+.type-swim .flip-back{background:#0e6b8a;color:#F7F4EF}
+.type-bike .flip-front{background:#1a6b3a;color:#F7F4EF}
+.type-bike .flip-back{background:#1a6b3a;color:#F7F4EF}
+.type-strength .flip-front{background:#6b2d6b;color:#F7F4EF}
+.type-strength .flip-back{background:#6b2d6b;color:#F7F4EF}
+.type-combo .flip-front{background:#8a4a1a;color:#F7F4EF}
+.type-combo .flip-back{background:#8a4a1a;color:#F7F4EF}
 .type-rest .flip-front{background:#EDE9E2;color:#8A8480}
 .type-rest .flip-back{background:#EDE9E2;color:#8A8480}
 
 /* Legend */
-.week-legend{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:1.5rem}
+.week-legend{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:1.5rem;align-items:center}
+.week-legend-instruction{font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);width:100%;margin-bottom:4px}
 .legend-item{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3)}
 .legend-dot{width:10px;height:10px;border-radius:2px}
 .dot-run{background:#192a55}
-.dot-swim{background:#1a5276}
-.dot-bike{background:#154360}
-.dot-strength{background:#4a235a}
-.dot-combo{background:#1a3a4a}
+.dot-swim{background:#0e6b8a}
+.dot-bike{background:#1a6b3a}
+.dot-strength{background:#6b2d6b}
+.dot-combo{background:#8a4a1a}
 .dot-rest{background:#D5CFC8}
 
 @media(max-width:768px){
@@ -206,7 +207,7 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
       <p class="phase-label">Phase 1 · Now → Jul 20, 2026 · ~6 Weeks</p>
       <h2 class="phase-title">Barcelona Base</h2>
       <p class="phase-meta">No target race · Build swim and bike foundation · Protect bodyweight</p>
-      <p class="phase-desc">Final weeks in Barcelona balancing internship, two courses, and research. The goal is simple: build swim and bike base so Phase 1.5 isn't starting from zero, cut gym sessions from 5–7 down to 3 per week, and do not lose weight. Everything is 80% Zone 2, 20% high intensity. No heroics.</p>
+      <p class="phase-desc">Final weeks in Barcelona balancing internship, two courses, 6 credit hours, and research. The goal is simple: build swim and bike base so Phase 1.5 isn't starting from zero, cut gym sessions from 5–7 down to 3 per week, and do not lose weight. Everything is 80% Zone 2, 20% high intensity. No heroics.</p>
     </div>
 
     <div class="sub-tabs">
@@ -215,7 +216,7 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
     </div>
 
     <div class="sub-content active" id="p1-schedule">
-      <div class="week-legend" style="align-items:center;"><span style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-right:16px;">Tap a card to see workout</span>
+      <div class="week-legend"><div class="week-legend-instruction">Tap a card to see workout</div>
         <div class="legend-item"><div class="legend-dot dot-run"></div>Run</div>
         <div class="legend-item"><div class="legend-dot dot-swim"></div>Swim</div>
         <div class="legend-item"><div class="legend-dot dot-bike"></div>Bike</div>
@@ -299,7 +300,7 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
     </div>
 
     <div class="sub-content active" id="p15-schedule">
-      <div class="week-legend" style="align-items:center;"><span style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-right:16px;">Tap a card to see workout</span>
+      <div class="week-legend"><div class="week-legend-instruction">Tap a card to see workout</div>
         <div class="legend-item"><div class="legend-dot dot-run"></div>Run</div>
         <div class="legend-item"><div class="legend-dot dot-swim"></div>Swim</div>
         <div class="legend-item"><div class="legend-dot dot-bike"></div>Bike</div>
@@ -412,7 +413,7 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
     </div>
 
     <div class="sub-content active" id="p15-schedule">
-      <div class="week-legend" style="align-items:center;"><span style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-right:16px;">Tap a card to see workout</span>
+      <div class="week-legend"><div class="week-legend-instruction">Tap a card to see workout</div>
         <div class="legend-item"><div class="legend-dot dot-run"></div>Run</div>
         <div class="legend-item"><div class="legend-dot dot-swim"></div>Swim</div>
         <div class="legend-item"><div class="legend-dot dot-bike"></div>Bike</div>
@@ -525,7 +526,7 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
     </div>
 
     <div class="sub-content active" id="p2-schedule">
-      <div class="week-legend" style="align-items:center;"><span style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-right:16px;">Tap a card to see workout</span>
+      <div class="week-legend"><div class="week-legend-instruction">Tap a card to see workout</div>
         <div class="legend-item"><div class="legend-dot dot-run"></div>Run</div>
         <div class="legend-item"><div class="legend-dot dot-swim"></div>Swim</div>
         <div class="legend-item"><div class="legend-dot dot-bike"></div>Bike</div>
@@ -635,7 +636,7 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
     </div>
 
     <div class="sub-content active" id="p3-schedule">
-      <div class="week-legend" style="align-items:center;"><span style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-right:16px;">Tap a card to see workout</span>
+      <div class="week-legend"><div class="week-legend-instruction">Tap a card to see workout</div>
         <div class="legend-item"><div class="legend-dot dot-run"></div>Run</div>
         <div class="legend-item"><div class="legend-dot dot-swim"></div>Swim</div>
         <div class="legend-item"><div class="legend-dot dot-strength"></div>Strength</div>
@@ -717,7 +718,7 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
     </div>
 
     <div class="sub-content active" id="p4-schedule">
-      <div class="week-legend" style="align-items:center;"><span style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-right:16px;">Tap a card to see workout</span>
+      <div class="week-legend"><div class="week-legend-instruction">Tap a card to see workout</div>
         <div class="legend-item"><div class="legend-dot dot-run"></div>Run</div>
         <div class="legend-item"><div class="legend-dot dot-swim"></div>Swim</div>
         <div class="legend-item"><div class="legend-dot dot-bike"></div>Bike</div>

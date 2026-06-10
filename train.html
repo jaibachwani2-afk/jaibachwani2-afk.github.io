@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Train · Jai Bachwani</title>
+<meta name="robots" content="noindex, nofollow"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#F7F4EF;
+  --ink:#1A1714;
+  --ink2:#4A4641;
+  --ink3:#8A8480;
+  --accent:#192a55;
+  --accent2:#4a6fa5;
+  --border:rgba(26,23,20,0.12);
+  --serif:'DM Serif Display',serif;
+  --sans:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden}
+
+nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:64px}
+.nav-logo{font-family:var(--serif);font-size:22px;letter-spacing:-0.5px;color:var(--ink)}
+.nav-back{font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);text-decoration:none;border-bottom:1.5px solid var(--accent);padding-bottom:1px}
+
+.hero{padding:80px 5vw 60px;border-bottom:1px solid var(--border)}
+.hero-eyebrow{font-size:12px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.hero-title{font-family:var(--serif);font-size:clamp(48px,7vw,80px);line-height:1.0;letter-spacing:-2px;margin-bottom:1.5rem}
+.hero-title em{font-style:italic;color:var(--accent)}
+.hero-sub{font-size:17px;font-weight:300;color:var(--ink2);max-width:560px;line-height:1.7;margin-bottom:3rem}
+
+.race-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-bottom:0}
+.race-card{padding:2rem;border:1px solid var(--border);background:var(--cream)}
+.race-name{font-family:var(--serif);font-size:18px;letter-spacing:-0.3px;margin-bottom:6px}
+.race-date{font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:12px}
+.race-countdown{font-family:var(--serif);font-size:36px;color:var(--accent);line-height:1}
+.race-countdown-label{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);margin-top:4px}
+
+.main{padding:60px 5vw}
+
+.phase-tabs{display:flex;gap:2px;margin-bottom:40px;flex-wrap:wrap}
+.phase-tab{padding:12px 24px;border:1px solid var(--border);background:var(--cream);font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:background 0.2s,color 0.2s,border-color 0.2s;color:var(--ink3)}
+.phase-tab.active{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.phase-tab:hover:not(.active){background:#EDE9E2;color:var(--ink)}
+
+.phase-content{display:none}
+.phase-content.active{display:block}
+
+.phase-header{margin-bottom:2rem}
+.phase-label{font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.phase-title{font-family:var(--serif);font-size:clamp(32px,4vw,48px);letter-spacing:-1px;line-height:1.05;margin-bottom:1rem}
+.phase-meta{font-size:14px;color:var(--ink3);margin-bottom:1.5rem}
+.phase-desc{font-size:16px;font-weight:300;color:var(--ink2);line-height:1.8;max-width:680px;margin-bottom:2.5rem}
+
+.sub-tabs{display:flex;gap:0;margin-bottom:2rem;border-bottom:1px solid var(--border)}
+.sub-tab{padding:10px 20px;font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;color:var(--ink3);border-bottom:2px solid transparent;transition:color 0.2s,border-color 0.2s}
+.sub-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.sub-tab:hover:not(.active){color:var(--ink)}
+
+.sub-content{display:none}
+.sub-content.active{display:block}
+
+.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:2rem}
+.day-card{border:1px solid var(--border);padding:1rem;cursor:pointer;transition:background 0.2s}
+.day-card:hover{background:#EDE9E2}
+.day-label{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.day-title{font-size:13px;font-weight:500;color:var(--ink);line-height:1.3}
+.day-detail{font-size:12px;color:var(--ink3);margin-top:4px;font-weight:300}
+.day-card.rest{background:#F0EDE8}
+.day-card.rest .day-title{color:var(--ink3)}
+
+.science-block{margin-bottom:2rem}
+.science-title{font-family:var(--serif);font-size:20px;margin-bottom:0.75rem;letter-spacing:-0.3px}
+.science-text{font-size:15px;color:var(--ink2);line-height:1.8;font-weight:300;margin-bottom:0.5rem}
+.science-cite{font-size:12px;color:var(--ink3);font-style:italic}
+
+.nutrition-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:2rem}
+.nutrition-card{padding:2rem;border:1px solid var(--border)}
+.nutrition-card-title{font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.nutrition-card-val{font-family:var(--serif);font-size:32px;color:var(--ink);line-height:1;margin-bottom:6px}
+.nutrition-card-desc{font-size:13px;color:var(--ink2);line-height:1.6;font-weight:300}
+
+.rules-list{display:flex;flex-direction:column;gap:0}
+.rule-item{display:flex;align-items:flex-start;gap:1.5rem;padding:1.25rem 0;border-bottom:1px solid var(--border)}
+.rule-num{font-family:var(--serif);font-size:24px;color:rgba(25,42,85,0.15);min-width:32px;line-height:1}
+.rule-text{font-size:15px;color:var(--ink2);line-height:1.7;font-weight:300}
+
+footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border)}
+.footer-name{font-family:var(--serif);font-size:18px;color:var(--ink3)}
+.footer-copy{font-size:12px;color:var(--ink3);letter-spacing:0.06em}
+
+@media(max-width:768px){
+  .race-grid{grid-template-columns:1fr 1fr}
+  .week-grid{grid-template-columns:repeat(4,1fr)}
+  .nutrition-grid{grid-template-columns:1fr}
+  .phase-tabs{gap:4px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Train</span>
+  <a href="/" class="nav-back">← Back</a>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow">Private · Jai Bachwani</p>
+  <h1 class="hero-title">The <em>Plan.</em></h1>
+  <p class="hero-sub">Four phases. Four races. One year. This is the personal training document. Built for me, not for an audience. Science-backed, schedule-aware, and honest about what the body can actually do alongside ICORE, Barcelona, and everything else.</p>
+
+  <div class="race-grid">
+    <div class="race-card">
+      <div class="race-date">Nov 7, 2026 · Indianapolis, IN</div>
+      <div class="race-name">Indianapolis Monumental Marathon</div>
+      <div class="race-countdown" id="cd1">—</div>
+      <div class="race-countdown-label">days out</div>
+    </div>
+    <div class="race-card">
+      <div class="race-date">Dec 10–13, 2026 · Nashville, TN</div>
+      <div class="race-name">HYROX Nashville</div>
+      <div class="race-countdown" id="cd2">—</div>
+      <div class="race-countdown-label">days out</div>
+    </div>
+    <div class="race-card">
+      <div class="race-date">Jan 31, 2027 · Miami, FL</div>
+      <div class="race-name">Miami Marathon</div>
+      <div class="race-countdown" id="cd3">—</div>
+      <div class="race-countdown-label">days out</div>
+    </div>
+    <div class="race-card">
+      <div class="race-date">Sep 26, 2027 · Augusta, GA</div>
+      <div class="race-name">IRONMAN 70.3 Augusta</div>
+      <div class="race-countdown" id="cd4">—</div>
+      <div class="race-countdown-label">days out</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="phase-tabs">
+    <div class="phase-tab active" onclick="switchPhase('p1',this)">Phase 1 · Barcelona Base</div>
+    <div class="phase-tab" onclick="switchPhase('p2',this)">Phase 2 · Indy Build</div>
+    <div class="phase-tab" onclick="switchPhase('p3',this)">Phase 3 · HYROX + Miami</div>
+    <div class="phase-tab" onclick="switchPhase('p4',this)">Phase 4 · Augusta 70.3</div>
+    <div class="phase-tab" onclick="switchPhase('rules',this)">Rules + Nutrition</div>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div class="phase-content active" id="p1">
+    <div class="phase-header">
+      <p class="phase-label">Phase 1 · Now → Aug 25, 2026 · 4 Weeks</p>
+      <h2 class="phase-title">Barcelona Base</h2>
+      <p class="phase-meta">No target race · Build swim and bike foundation · Protect bodyweight</p>
+      <p class="phase-desc">Final weeks in Barcelona balancing internship, two courses, and research. The goal is simple: build swim and bike base so Phase 2 isn't starting from zero, cut gym sessions from 5–7 down to 3 per week, and do not lose weight. Everything is 80% Zone 2, 20% high intensity. No heroics.</p>
+    </div>
+
+    <div class="sub-tabs">
+      <div class="sub-tab active" onclick="switchSub('p1-schedule',this,'p1')">Weekly Schedule</div>
+      <div class="sub-tab" onclick="switchSub('p1-science',this,'p1')">Science</div>
+    </div>
+
+    <div class="sub-content active" id="p1-schedule">
+      <div class="week-grid">
+        <div class="day-card">
+          <div class="day-label">Monday</div>
+          <div class="day-title">Zone 2 Run</div>
+          <div class="day-detail">45 min easy. Conversational pace. Heart rate 130–150.</div>
+        </div>
+        <div class="day-card">
+          <div class="day-label">Tuesday</div>
+          <div class="day-title">Strength A</div>
+          <div class="day-detail">Push + core. Bench, overhead press, dips, plank variations.</div>
+        </div>
+        <div class="day-card">
+          <div class="day-label">Wednesday</div>
+          <div class="day-title">Swim + Bike</div>
+          <div class="day-detail">Technique swim 1,500–2,000m. Then Zone 2 bike 45 min.</div>
+        </div>
+        <div class="day-card">
+          <div class="day-label">Thursday</div>
+          <div class="day-title">Strength B</div>
+          <div class="day-detail">Pull + posterior chain. Rows, deadlifts, hamstring curls.</div>
+        </div>
+        <div class="day-card">
+          <div class="day-label">Friday</div>
+          <div class="day-title">Tempo Run</div>
+          <div class="day-detail">35 min. 20 min at comfortably hard effort in the middle.</div>
+        </div>
+        <div class="day-card">
+          <div class="day-label">Saturday</div>
+          <div class="day-title">Long Ride + Swim</div>
+          <div class="day-detail">75–90 min Zone 2 ride. Then continuous swim 1,000–1,500m.</div>
+        </div>
+        <div class="day-card rest">
+          <div class="day-label">Sunday</div>
+          <div class="day-title">Full Rest</div>
+          <div class="day-detail">Nothing. Sleep. Eat. Walk if you want.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-content" id="p1-science">
+      <div class="science-block">
+        <div class="science-title">80/20 Polarized Training</div>
+        <div class="science-text">The 80% Zone 2, 20% high intensity split is based on polarized training research. Endurance athletes who train predominantly at low intensity with a small amount of high intensity outperform those who train at moderate intensity across the board. The mechanism is mitochondrial density and aerobic enzyme adaptation without accumulating fatigue.</div>
+        <div class="science-cite">Seiler, S. & Tønnessen, E. (2009). Intervals, thresholds, and long slow distance: the role of intensity and duration in endurance training. Sportscience, 13, 32–53.</div>
+      </div>
+      <div class="science-block">
+        <div class="science-title">Concurrent Training</div>
+        <div class="science-text">Cutting strength sessions from 5–7 to 3 during this phase reduces interference effect, the phenomenon where excessive strength volume blunts endurance adaptation. Three sessions per week maintains muscle mass and strength without competing with aerobic development.</div>
+        <div class="science-cite">Wilson, J.M. et al. (2012). Concurrent training: a meta-analysis examining interference of aerobic and resistance exercises. Journal of Strength and Conditioning Research, 26(8), 2293–2307.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase-content" id="p2">
+    <div class="phase-header">
+      <p class="phase-label">Phase 2 · Aug 26 → Nov 6, 2026 · ~10 Weeks</p>
+      <h2 class="phase-title">ICORE + Indy Build</h2>
+      <p class="phase-meta">Target race · Indianapolis Monumental Marathon · November 7, 2026</p>
+      <p class="phase-desc">ICORE starts August 26. This is the hardest academic block of college. The built-in rule is non-negotiable: any week with a major ICORE deadline, drop all intensity sessions and keep only Zone 2 run and one swim. The marathon will happen regardless. The question is whether the body is ready for a good one or just a finish.</p>
+    </div>
+
+    <div class="sub-tabs">
+      <div class="sub-tab active" onclick="switchSub('p2-schedule',this,'p2')">Weekly Structure</div>
+      <div class="sub-tab" onclick="switchSub('p2-science',this,'p2')">Science</div>
+      <div class="sub-tab" onclick="switchSub('p2-nutrition',this,'p2')">Nutrition</div>
+    </div>
+
+    <div class="sub-content active" id="p2-schedule">
+      <div class="week-grid">
+        <div class="day-card">
+          <div class="day-label">Monday</div>
+          <div class="day-title">Easy Run</div>
+          <div class="day-detail">45–60 min Zone 2. Recovery from weekend long run.</div>
+        </div>
+        <div class="day-card">
+          <div class="day-label">Tuesday</div>
+          <div class="day-title">Strength</div>
+          <div class="day-detail">Full body maintenance. Keep weight on the bar.</div>
+        </div>
+        <div class="day-card">
+          <div class="day-label">Wednesday</div>
+          <div class="day-title">Threshold / Intervals</div>
+          <div class="day-detail">Alternating weeks: 30 min threshold run OR 6×800m at 5K effort.</div>
+        </div>
+        <div class="day-card">
+          <div class="day-label">Thursday</div>
+          <div class="day-title">Swim</div>
+          <div class="day-detail">2,000–2,500m. Keep triathlon base alive.</div>
+        </div>
+        <div class="day-card">
+          <div class="day-label">Friday</div>
+          <div class="day-title">Easy Run or Rest</div>
+          <div class="day-detail">30–40 min shakeout. Or full rest if fatigued.</div>
+        </div>
+        <div class="day-card">
+          <div class="day-label">Saturday</div>
+          <div class="day-title">Long Run</div>
+          <div class="day-detail">Wks 1–3: 14–16mi. Wks 4–6: 16–18mi. Wks 7–8: 18–20mi. Taper wk: 10–12mi. Always 60–90 sec/mi slower than goal pace.</div>
+        </div>
+        <div class="day-card">
+          <div class="day-label">Sunday</div>
+          <div class="day-title">Long Bike</div>
+          <div class="day-detail">90–120 min Zone 2 ride. Keeps triathlon base building.</div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--ink3);font-style:italic;margin-top:1rem">ICORE override: major deadline week drops all intensity. Keep only Zone 2 run and one swim. No exceptions.</p>
+    </div>
+
+    <div class="sub-content" id="p2-science">
+      <div class="science-block">
+        <div class="science-title">Long Run Pacing</div>
+        <div class="science-text">Running 60–90 seconds per mile slower than goal marathon pace on long runs optimizes aerobic adaptation while minimizing injury risk and recovery time. The purpose of the long run is time on feet and fat oxidation training, not speed development.</div>
+        <div class="science-cite">Daniels, J. (2005). Daniels' Running Formula (2nd ed.). Human Kinetics.</div>
+      </div>
+      <div class="science-block">
+        <div class="science-title">Pre-Long Run Carb Loading</div>
+        <div class="science-text">Carbohydrate loading the night before every long run and race week saturates muscle glycogen stores. The target of 6–10g carbs per kg bodyweight is supported by multiple studies showing significant performance benefits for efforts over 90 minutes.</div>
+        <div class="science-cite">Burke, L.M. et al. (2011). Carbohydrates for training and competition. Journal of Sports Sciences, 29(S1), S17–S27.</div>
+      </div>
+    </div>
+
+    <div class="sub-content" id="p2-nutrition">
+      <div class="nutrition-grid">
+        <div class="nutrition-card">
+          <div class="nutrition-card-title">Base Calories</div>
+          <div class="nutrition-card-val">3,200–3,500</div>
+          <div class="nutrition-card-desc">kcal/day on normal training days. Rise to 3,500–3,800 on long run days.</div>
+        </div>
+        <div class="nutrition-card">
+          <div class="nutrition-card-title">Protein Target</div>
+          <div class="nutrition-card-val">1.8g/kg</div>
+          <div class="nutrition-card-desc">Minimum daily. Rising to 2.0g/kg post-marathon for recovery.</div>
+        </div>
+        <div class="nutrition-card">
+          <div class="nutrition-card-title">Pre-Long Run Carbs</div>
+          <div class="nutrition-card-val">6–10g/kg</div>
+          <div class="nutrition-card-desc">Night before every long run and race week. Pasta, rice, potatoes.</div>
+        </div>
+        <div class="nutrition-card">
+          <div class="nutrition-card-title">Pre-Sleep Casein</div>
+          <div class="nutrition-card-val">Every night</div>
+          <div class="nutrition-card-desc">Greek yogurt or milk. Slow-digesting protein for overnight muscle repair per Res et al. (2012).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase-content" id="p3">
+    <div class="phase-header">
+      <p class="phase-label">Phase 3 · Nov 8, 2026 → Jan 31, 2027 · ~12 Weeks</p>
+      <h2 class="phase-title">HYROX + Miami Bridge</h2>
+      <p class="phase-meta">HYROX Nashville · Dec 10–13 · Miami Marathon · Jan 31, 2027</p>
+      <p class="phase-desc">Two rules going into this phase: Miami is a fitness day with a bib, not a second peak. HYROX Nashville is a completion goal. Legs will not be fully fresh 33 days post-Indy. The first two weeks are active recovery only. No running. Then build back carefully with HYROX station work and swim volume for Augusta.</p>
+    </div>
+
+    <div class="sub-tabs">
+      <div class="sub-tab active" onclick="switchSub('p3-schedule',this,'p3')">Weekly Structure</div>
+      <div class="sub-tab" onclick="switchSub('p3-science',this,'p3')">Notes</div>
+    </div>
+
+    <div class="sub-content active" id="p3-schedule">
+      <div class="week-grid">
+        <div class="day-card rest">
+          <div class="day-label">Wks 1–2</div>
+          <div class="day-title">Active Recovery</div>
+          <div class="day-detail">No running. Walking, light swimming, mobility only.</div>
+        </div>
+        <div class="day-card">
+          <div class="day-label">Wks 3–4</div>
+          <div class="day-title">HYROX Intro</div>
+          <div class="day-detail">Easy running returns. Ski erg, sled push/pull, burpee broad jumps, rowing, sandbag lunges, wall balls.</div>
+        </div>
+        <div class="day-card">
+          <div class="day-label">Wks 5–8</div>
+          <div class="day-title">Long Run Cap</div>
+          <div class="day-detail">Max 14 miles. 3 swim sessions per week. Two bike rides: 90 min + 2 hours.</div>
+        </div>
+        <div class="day-card">
+          <div class="day-label">Dec 10–13</div>
+          <div class="day-title">HYROX Nashville</div>
+          <div class="day-detail">Completion goal only. Finish strong. Don't race it.</div>
+        </div>
+        <div class="day-card">
+          <div class="day-label">Dec–Jan</div>
+          <div class="day-title">Miami Build</div>
+          <div class="day-detail">Continue easy running. Miami is a fun run. Show up fit, not peaked.</div>
+        </div>
+        <div class="day-card">
+          <div class="day-label">Jan 31</div>
+          <div class="day-title">Miami Marathon</div>
+          <div class="day-detail">Fitness day with a bib. Run by feel. Enjoy it.</div>
+        </div>
+        <div class="day-card rest">
+          <div class="day-label">Throughout</div>
+          <div class="day-title">Swim Volume</div>
+          <div class="day-detail">3 sessions per week building Augusta base. Most important training of this block.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-content" id="p3-science">
+      <div class="science-block">
+        <div class="science-title">Post-Marathon Recovery Window</div>
+        <div class="science-text">Full physiological recovery from a marathon takes 3–4 weeks minimum. Muscle damage, glycogen depletion, and immune suppression all require time. The 2-week no-running rule in weeks 1–2 of this phase is based on this. Returning before that increases injury risk significantly.</div>
+        <div class="science-cite">Petersen, J. et al. (2007). Running mechanics and injury risk. Sports Medicine.</div>
+      </div>
+      <div class="science-block">
+        <div class="science-title">HYROX as Strength Stimulus</div>
+        <div class="science-text">HYROX station work serves a dual purpose here: race completion and functional strength stimulus for Augusta. The sled, sandbag lunges, and wall balls specifically target the posterior chain and leg endurance that will matter on the Augusta bike and run.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="phase-content" id="p4">
+    <div class="phase-header">
+      <p class="phase-label">Phase 4 · Feb 1 → Sep 25, 2027 · ~34 Weeks</p>
+      <h2 class="phase-title">Augusta 70.3 Build</h2>
+      <p class="phase-meta">Target race · IRONMAN 70.3 Augusta · September 26, 2027</p>
+      <p class="phase-desc">The main event. First 3 weeks post-Miami are recovery, then the full triathlon block begins. Augusta was chosen specifically: current-assisted downstream Savannah River swim, manageable rolling bike course, flat run along the Augusta Riverwalk. 34 weeks is enough time to build properly if the earlier phases went well.</p>
+    </div>
+
+    <div class="sub-tabs">
+      <div class="sub-tab active" onclick="switchSub('p4-schedule',this,'p4')">Weekly Structure</div>
+      <div class="sub-tab" onclick="switchSub('p4-science',this,'p4')">Science</div>
+      <div class="sub-tab" onclick="switchSub('p4-nutrition',this,'p4')">Nutrition</div>
+    </div>
+
+    <div class="sub-content active" id="p4-schedule">
+      <div class="week-grid">
+        <div class="day-card rest">
+          <div class="day-label">Monday</div>
+          <div class="day-title">Rest / Mobility</div>
+          <div class="day-detail">Full recovery. Stretch, foam roll, sleep.</div>
+        </div>
+        <div class="day-card">
+          <div class="day-label">Tuesday</div>
+          <div class="day-title">Swim + Intervals</div>
+          <div class="day-detail">Masters swim 2,500–3,500m. Then interval run: 5×1000m at 5K effort.</div>
+        </div>
+        <div class="day-card">
+          <div class="day-label">Wednesday</div>
+          <div class="day-title">Long Ride</div>
+          <div class="day-detail">Building from 2.5 to 4 hours over the block. Zone 2 base with some tempo efforts later.</div>
+        </div>
+        <div class="day-card">
+          <div class="day-label">Thursday</div>
+          <div class="day-title">Strength / HYROX</div>
+          <div class="day-detail">Alternating weeks. Maintain muscle. Don't lose the strength from earlier phases.</div>
+        </div>
+        <div class="day-card">
+          <div class="day-label">Friday</div>
+          <div class="day-title">Open Water Prep</div>
+          <div class="day-detail">From June 2027 onward. Practice sighting, current navigation, wetsuit comfort.</div>
+        </div>
+        <div class="day-card">
+          <div class="day-label">Saturday</div>
+          <div class="day-title">Brick Workout</div>
+          <div class="day-detail">90–120 min bike immediately into 20–30 min run. No rest between. Train the transition.</div>
+        </div>
+        <div class="day-card">
+          <div class="day-label">Sunday</div>
+          <div class="day-title">Long Run</div>
+          <div class="day-detail">Half marathon distance at easy pace. Aerobic base maintenance.</div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--ink3);font-style:italic;margin-top:1rem">Deload every 3rd–4th week. Cut volume 30–40%. Non-negotiable.</p>
+      <p style="font-size:13px;color:var(--accent);font-style:italic;margin-top:0.5rem">Minimum 4–5 open water swims before race day. Start as soon as water permits in 2027.</p>
+    </div>
+
+    <div class="sub-content" id="p4-science">
+      <div class="science-block">
+        <div class="science-title">Brick Workouts</div>
+        <div class="science-text">Bike-to-run training develops the neuromuscular adaptation needed to run efficiently on fatigued legs. The body learns to recruit running-specific muscle fibers while still flushing lactic acid from the cycling effort. This is the most race-specific session in the whole plan.</div>
+      </div>
+      <div class="science-block">
+        <div class="science-title">Why Augusta</div>
+        <div class="science-text">Augusta 70.3 is one of the fastest 70.3 courses in North America for a reason. The Savannah River swim is downstream and current-assisted, making the 1.2 mile swim significantly more manageable for a first 70.3. The bike is rolling but not technical. The run is flat. The course is designed for people doing their first half ironman to have a good experience.</div>
+      </div>
+      <div class="science-block">
+        <div class="science-title">Deload Periodization</div>
+        <div class="science-text">Deloading every 3rd–4th week allows supercompensation, the physiological process where the body adapts to training stress during recovery and comes back stronger. Training without deloads plateaus fitness and accumulates fatigue without net gain.</div>
+        <div class="science-cite">Issurin, V.B. (2010). New horizons for the methodology and physiology of training periodization. Sports Medicine, 40(3), 189–206.</div>
+      </div>
+    </div>
+
+    <div class="sub-content" id="p4-nutrition">
+      <div class="nutrition-grid">
+        <div class="nutrition-card">
+          <div class="nutrition-card-title">Base Calories</div>
+          <div class="nutrition-card-val">3,200–3,500</div>
+          <div class="nutrition-card-desc">Rising to 3,500–3,800 on long ride or brick days.</div>
+        </div>
+        <div class="nutrition-card">
+          <div class="nutrition-card-title">On-Bike Fueling</div>
+          <div class="nutrition-card-val">60–90g/hr</div>
+          <div class="nutrition-card-desc">Carbohydrates per hour on bike efforts over 60 minutes. Gels, chews, or sports drink.</div>
+        </div>
+        <div class="nutrition-card">
+          <div class="nutrition-card-title">Protein</div>
+          <div class="nutrition-card-val">1.8–2.0g/kg</div>
+          <div class="nutrition-card-desc">Minimum daily. Higher end during heavy training weeks and recovery weeks.</div>
+        </div>
+        <div class="nutrition-card">
+          <div class="nutrition-card-title">Track With</div>
+          <div class="nutrition-card-val">Cronometer</div>
+          <div class="nutrition-card-desc">Log everything. Weekly weight check. If not trending where it needs to be, fix nutrition before touching training.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RULES + NUTRITION -->
+  <div class="phase-content" id="rules">
+    <div class="phase-header">
+      <p class="phase-label">Non-Negotiables</p>
+      <h2 class="phase-title">The Rules</h2>
+      <p class="phase-desc">These apply across every phase, every week, no exceptions. When in doubt, go back to the rules.</p>
+    </div>
+
+    <div class="rules-list" style="margin-bottom:3rem">
+      <div class="rule-item">
+        <div class="rule-num">01</div>
+        <div class="rule-text">7–8 hours sleep minimum. Non-negotiable. No training adaptation happens without it.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">02</div>
+        <div class="rule-text">Deload every 3rd–4th week. Cut volume 30–40%. The body adapts during recovery, not during training.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">03</div>
+        <div class="rule-text">ICORE override: any week with a major deadline drops all intensity sessions. Keep only Zone 2 run and one swim. The degree is not worth an injury.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">04</div>
+        <div class="rule-text">Weekly weight check. If not trending where it needs to be, fix nutrition before touching training volume.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">05</div>
+        <div class="rule-text">Pain that changes gait stops training that session. Full stop. Walk home if necessary.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">06</div>
+        <div class="rule-text">Minimum 4–5 open water swims before Augusta race day. Start as soon as open water is accessible in 2027.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">07</div>
+        <div class="rule-text">Pre-sleep casein every night. Greek yogurt or milk. Overnight muscle repair is free recovery.</div>
+      </div>
+    </div>
+
+    <p class="phase-label" style="margin-bottom:1.5rem">Nutrition Anchors</p>
+    <div class="nutrition-grid">
+      <div class="nutrition-card">
+        <div class="nutrition-card-title">Base Calories</div>
+        <div class="nutrition-card-val">3,200–3,500</div>
+        <div class="nutrition-card-desc">Rising to 3,500–3,800 on long run or ride days. Track with Cronometer.</div>
+      </div>
+      <div class="nutrition-card">
+        <div class="nutrition-card-title">Protein</div>
+        <div class="nutrition-card-val">1.8g/kg</div>
+        <div class="nutrition-card-desc">Minimum daily. Rising to 2.0g/kg post-marathon. Every meal should have a protein anchor.</div>
+      </div>
+      <div class="nutrition-card">
+        <div class="nutrition-card-title">Carb Load Protocol</div>
+        <div class="nutrition-card-val">6–10g/kg</div>
+        <div class="nutrition-card-desc">Night before every long run and race week. Pasta, rice, bread, potatoes. Burke et al. (2011).</div>
+      </div>
+      <div class="nutrition-card">
+        <div class="nutrition-card-title">On-Bike Fueling</div>
+        <div class="nutrition-card-val">60–90g/hr</div>
+        <div class="nutrition-card-desc">Carbohydrates per hour on any bike effort over 60 minutes. Practice this in training. Gut issues on race day are a training failure.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span class="footer-name">Jai Bachwani · Private</span>
+  <span class="footer-copy">Not indexed · Not public</span>
+</footer>
+
+<script>
+// Countdowns
+function daysUntil(dateStr){
+  const today = new Date()
+  today.setHours(0,0,0,0)
+  const target = new Date(dateStr)
+  const diff = Math.ceil((target - today) / (1000*60*60*24))
+  return diff > 0 ? diff : 0
+}
+document.getElementById('cd1').textContent = daysUntil('2026-11-07')
+document.getElementById('cd2').textContent = daysUntil('2026-12-10')
+document.getElementById('cd3').textContent = daysUntil('2027-01-31')
+document.getElementById('cd4').textContent = daysUntil('2027-09-26')
+
+// Phase tabs
+function switchPhase(id, el){
+  document.querySelectorAll('.phase-content').forEach(p => p.classList.remove('active'))
+  document.querySelectorAll('.phase-tab').forEach(t => t.classList.remove('active'))
+  document.getElementById(id).classList.add('active')
+  el.classList.add('active')
+}
+
+// Sub tabs
+function switchSub(id, el, phase){
+  const parent = document.getElementById(phase)
+  parent.querySelectorAll('.sub-content').forEach(s => s.classList.remove('active'))
+  parent.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'))
+  document.getElementById(id).classList.add('active')
+  el.classList.add('active')
+}
+</script>
+</body>
+</html>

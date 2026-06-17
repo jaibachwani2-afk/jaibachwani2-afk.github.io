@@ -56,10 +56,15 @@ nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px 
 
 .main{padding:60px 5vw}
 
-.phase-tabs{display:flex;gap:2px;margin-bottom:40px;flex-wrap:wrap}
-.phase-tab{padding:12px 24px;border:1px solid var(--border);background:var(--cream);font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:background 0.2s,color 0.2s,border-color 0.2s;color:var(--ink3)}
+.phase-tabs{display:flex;gap:10px;margin-bottom:48px;flex-wrap:wrap}
+.phase-tab{padding:10px 20px;border:2px solid var(--border);background:transparent;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;color:var(--ink3);border-radius:100px;display:flex;align-items:center;gap:8px}
+.phase-tab .tab-num{width:20px;height:20px;border-radius:50%;background:var(--border);color:var(--ink3);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0}
+.phase-tab:hover:not(.active){border-color:var(--ink2);color:var(--ink);background:rgba(26,23,20,0.04)}
+.phase-tab:hover:not(.active) .tab-num{background:var(--ink2);color:var(--cream)}
 .phase-tab.active{background:var(--ink);color:var(--cream);border-color:var(--ink)}
-.phase-tab:hover:not(.active){background:#EDE9E2;color:var(--ink)}
+.phase-tab.active .tab-num{background:var(--accent2);color:var(--cream)}
+.phase-tab.tab-rules{border-radius:8px}
+.phase-tab.tab-rules .tab-num{display:none}
 
 .phase-content{display:none}
 .phase-content.active{display:block}
@@ -151,12 +156,16 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
   .countdown-grid{gap:3px}
 
   .week-grid{grid-template-columns:repeat(2,1fr);gap:8px}
-  .flip-card{height:auto;min-height:140px}
-  .flip-card-inner{min-height:140px}
-  .flip-front,.flip-back{position:relative;min-height:140px;padding:0.875rem}
-  .flip-back{position:absolute;top:0;left:0}
-  .flip-title{font-size:13px}
-  .flip-detail{font-size:11px;line-height:1.45}
+  .flip-card{height:200px;perspective:none;overflow:hidden}
+  .flip-card-inner{position:relative;width:100%;height:100%}
+  .flip-front{position:absolute;top:0;left:0;width:100%;height:100%;padding:0.875rem;transition:opacity 0.2s ease;opacity:1;pointer-events:auto}
+  .flip-back{position:absolute;top:0;left:0;width:100%;height:100%;padding:0.875rem;opacity:0;pointer-events:none;transition:opacity 0.2s ease 0.1s}
+  .flip-card.flipped .flip-front{opacity:0;pointer-events:none}
+  .flip-card.flipped .flip-back{opacity:1;pointer-events:auto}
+  .flip-title{font-size:12px}
+  .flip-detail{font-size:11px;line-height:1.5}
+  .flip-day{font-size:9px}
+  .flip-tap{font-size:9px}
 
   .nutrition-grid{grid-template-columns:1fr}
   .phase-tabs{gap:4px}
@@ -203,17 +212,18 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
       <div class="countdown-grid" id="cd4"></div>
     </div>
   </div>
+  </div>
 </div>
 
 <div class="main">
 
   <div class="phase-tabs">
-    <div class="phase-tab active" onclick="switchPhase('p1',this)">Phase 1 · Barcelona Base</div>
-    <div class="phase-tab" onclick="switchPhase('p15',this)">Phase 1.5 · Nashville Window</div>
-    <div class="phase-tab" onclick="switchPhase('p2',this)">Phase 2 · Indy Build</div>
-    <div class="phase-tab" onclick="switchPhase('p3',this)">Phase 3 · HYROX + Miami</div>
-    <div class="phase-tab" onclick="switchPhase('p4',this)">Phase 4 · Augusta 70.3</div>
-    <div class="phase-tab" onclick="switchPhase('rules',this)">Rules + Nutrition</div>
+    <div class="phase-tab active" onclick="switchPhase('p1',this)"><span class="tab-num">1</span>Barcelona Base</div>
+    <div class="phase-tab" onclick="switchPhase('p15',this)"><span class="tab-num">1.5</span>Nashville Window</div>
+    <div class="phase-tab" onclick="switchPhase('p2',this)"><span class="tab-num">2</span>Indy Build</div>
+    <div class="phase-tab" onclick="switchPhase('p3',this)"><span class="tab-num">3</span>HYROX + Miami</div>
+    <div class="phase-tab" onclick="switchPhase('p4',this)"><span class="tab-num">4</span>Augusta 70.3</div>
+    <div class="phase-tab tab-rules" onclick="switchPhase('rules',this)">Rules + Nutrition</div>
   </div>
 
   <!-- PHASE 1 -->
@@ -228,6 +238,7 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
     <div class="sub-tabs">
       <div class="sub-tab active" onclick="switchSub('p1-schedule',this,'p1')">Weekly Schedule</div>
       <div class="sub-tab" onclick="switchSub('p1-science',this,'p1')">Science</div>
+      <div class="sub-tab" onclick="switchSub('p1-nutrition',this,'p1')">Nutrition</div>
     </div>
 
     <div class="sub-content active" id="p1-schedule">
@@ -240,64 +251,156 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
         <div class="legend-item"><div class="legend-dot dot-rest"></div>Rest</div>
       </div>
       <div class="week-grid">
-        <div class="flip-card type-run" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-combo" onclick="flipCard(this)">
           <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Monday</span><span class="flip-title">Zone 2 Run</span><span class="flip-type">Run</span></div>
-            <div class="flip-back"><span class="flip-day">Monday</span><span class="flip-detail">45 min easy. Conversational pace. Heart rate 130–150.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-front"><span class="flip-day">Monday</span><span class="flip-title">Stunna Push + Easy Run</span><span class="flip-type">Combo</span></div>
+            <div class="flip-back"><span class="flip-day">Monday</span><span class="flip-detail">Normal Stunna Push day, then add: band pull-aparts 3×15, face pulls 3×15. Then 35 min easy run at 10:15–10:45/mi. Add 4×20 sec strides at the end. Not sprinting. Controlled accelerations.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-strength" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-swim" onclick="flipCard(this)">
           <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Tuesday</span><span class="flip-title">Strength A</span><span class="flip-type">Strength</span></div>
-            <div class="flip-back"><span class="flip-day">Tuesday</span><span class="flip-detail">Push + core. Bench, overhead press, dips, plank variations.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-front"><span class="flip-day">Tuesday</span><span class="flip-title">Swim Technique</span><span class="flip-type">Swim</span></div>
+            <div class="flip-back"><span class="flip-day">Tuesday</span><span class="flip-detail">Wks 1–2: 6×50m with 30s rest. Focus on breathing rhythm and catch. ~600m total. Wks 3–4: 8×75m. Wks 5–6: 10×100m. Quality over distance. Bad technique at high volume builds bad habits.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-combo" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-combo" onclick="flipCard(this)">
           <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Wednesday</span><span class="flip-title">Swim + Bike</span><span class="flip-type">Combo</span></div>
-            <div class="flip-back"><span class="flip-day">Wednesday</span><span class="flip-detail">Technique swim 1,500–2,000m. Then Zone 2 bike 45 min.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-front"><span class="flip-day">Wednesday</span><span class="flip-title">Stunna Pull + Threshold Run</span><span class="flip-type">Combo</span></div>
+            <div class="flip-back"><span class="flip-day">Wednesday</span><span class="flip-detail">Normal Stunna Pull day, then add: lat pulldown 3×12, single-arm row 3×12. Then threshold run: 10 min easy warmup, 20 min at 8:45–9:00/mi (comfortably hard, can speak in short phrases), 5 min cooldown.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-strength" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-run" onclick="flipCard(this)">
           <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Thursday</span><span class="flip-title">Strength B</span><span class="flip-type">Strength</span></div>
-            <div class="flip-back"><span class="flip-day">Thursday</span><span class="flip-detail">Pull + posterior chain. Rows, deadlifts, hamstring curls.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-front"><span class="flip-day">Thursday</span><span class="flip-title">Easy Run</span><span class="flip-type">Run</span></div>
+            <div class="flip-back"><span class="flip-day">Thursday</span><span class="flip-detail">40 min at 10:15–10:45/mi. True recovery. If it feels too slow, good. That means it's working. Add 4×20 sec strides at end.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-run" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-strength" onclick="flipCard(this)">
           <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Friday</span><span class="flip-title">Tempo Run</span><span class="flip-type">Run</span></div>
-            <div class="flip-back"><span class="flip-day">Friday</span><span class="flip-detail">35 min. 20 min at comfortably hard effort in the middle.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-front"><span class="flip-day">Friday</span><span class="flip-title">Stunna Legs</span><span class="flip-type">Strength</span></div>
+            <div class="flip-back"><span class="flip-day">Friday</span><span class="flip-detail">Normal Stunna Legs day, then add: single-leg RDL 3×10, calf raises 4×20, hip flexor stretch. Critical for running economy and bike power. Do not skip this session.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-combo" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-combo" onclick="flipCard(this)">
           <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Saturday</span><span class="flip-title">Long Ride + Swim</span><span class="flip-type">Combo</span></div>
-            <div class="flip-back"><span class="flip-day">Saturday</span><span class="flip-detail">75–90 min Zone 2 ride. Then continuous swim 1,000–1,500m.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-front"><span class="flip-day">Saturday</span><span class="flip-title">Long Ride + Open Water</span><span class="flip-type">Combo</span></div>
+            <div class="flip-back"><span class="flip-day">Saturday</span><span class="flip-detail">60–75 min Zone 2 bike. Then 400–600m continuous swim in Mediterranean. Open water exposure is the goal. Sight, breathe, float, repeat. Distance is irrelevant right now.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-rest" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-rest" onclick="flipCard(this)">
           <div class="flip-card-inner">
             <div class="flip-front"><span class="flip-day">Sunday</span><span class="flip-title">Full Rest</span><span class="flip-type">Rest</span></div>
-            <div class="flip-back"><span class="flip-day">Sunday</span><span class="flip-detail">Nothing. Sleep. Eat. Walk if you want.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-back"><span class="flip-day">Sunday</span><span class="flip-detail">Nothing. Sleep. Walk the beach. Adaptation happens during rest, not during training.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
       </div>
+      <p style="font-size:13px;color:var(--ink3);font-style:italic;margin-top:1rem">Swim note: starting at 600m broken into short sets is correct for an untrained swimmer. Building technique now saves months of injury rehab later. The Mediterranean swims on Saturday are about comfort in open water, not volume.</p>
+      <div style="margin-top:2rem;overflow-x:auto">
+        <p style="font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:12px">Pace Reference · VDOT 38–39 · Target 3:30–3:45</p>
+        <table style="width:100%;border-collapse:collapse;font-family:var(--sans);font-size:12px;min-width:520px">
+          <thead><tr style="border-bottom:2px solid var(--ink)">
+            <th style="text-align:left;padding:8px 12px 8px 0;font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3)">Zone</th>
+            <th style="text-align:left;padding:8px 12px;font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3)">Pace (min/mi)</th>
+            <th style="text-align:left;padding:8px 12px;font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3)">Effort</th>
+            <th style="text-align:left;padding:8px 12px;font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3)">When</th>
+            <th style="text-align:left;padding:8px 0;font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3)">Purpose</th>
+          </tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Easy (E)</span></td>
+              <td style="padding:9px 12px;font-weight:500;color:var(--ink)">10:15 – 10:45</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Full conversation</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Mon + Thu</td>
+              <td style="padding:9px 0;color:var(--ink2);font-weight:300">Aerobic base, recovery</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);background:rgba(25,42,85,0.02)">
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Long (L)</span></td>
+              <td style="padding:9px 12px;font-weight:500;color:var(--ink)">10:00 – 10:30</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Comfortable, short sentences</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Sat first 80%</td>
+              <td style="padding:9px 0;color:var(--ink2);font-weight:300">Endurance, fat oxidation</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Marathon (M)</span></td>
+              <td style="padding:9px 12px;font-weight:500;color:var(--ink)">8:15 – 8:30</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Controlled hard, race effort</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Sat final 3–4 mi</td>
+              <td style="padding:9px 0;color:var(--ink2);font-weight:300">Race rehearsal, pacing</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);background:rgba(25,42,85,0.02)">
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Threshold (T)</span></td>
+              <td style="padding:9px 12px;font-weight:500;color:var(--ink)">8:40 – 8:55</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Comfortably hard, short phrases</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Wed every week</td>
+              <td style="padding:9px 0;color:var(--ink2);font-weight:300">Lactate threshold. Biggest PR lever</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Interval (I)</span></td>
+              <td style="padding:9px 12px;font-weight:500;color:var(--ink)">8:15 – 8:30</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Hard, 2–3 words max</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Tue 800m repeats</td>
+              <td style="padding:9px 0;color:var(--ink2);font-weight:300">VO2max development</td>
+            </tr>
+            <tr>
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Strides (R)</span></td>
+              <td style="padding:9px 12px;font-weight:500;color:var(--ink)">7:00 – 7:30</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Fast, controlled, 20 sec</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">After Mon + Thu</td>
+              <td style="padding:9px 0;color:var(--ink2);font-weight:300">Speed, running economy</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size:11px;color:var(--ink3);margin-top:10px;font-style:italic">Recalibrate every 4–6 weeks. Target VDOT 44–46 by Indianapolis. These paces will get faster.</p>
+      </div>
+
     </div>
 
     <div class="sub-content" id="p1-science">
       <div class="science-block">
-        <div class="science-title">80/20 Polarized Training</div>
-        <div class="science-text">The 80% Zone 2, 20% high intensity split is based on polarized training research. Endurance athletes who train predominantly at low intensity with a small amount of high intensity outperform those who train at moderate intensity across the board. The mechanism is mitochondrial density and aerobic enzyme adaptation without accumulating fatigue.</div>
-        <div class="science-cite">Seiler, S. & Tønnessen, E. (2009). Intervals, thresholds, and long slow distance: the role of intensity and duration in endurance training. Sportscience, 13, 32–53.</div>
+        <div class="science-title">Why These Paces: VDOT Framework</div>
+        <div class="science-text">Your 4:07 LA Marathon corresponds to approximately VDOT 38–39. Your 3:30–3:45 goal requires VDOT 44–46, a 6–8 point improvement. The paces in this plan are derived from Daniels' VDOT equations and calibrated to your current fitness, not your goal fitness. Running at goal pace now when your VDOT doesn't support it leads to chronic fatigue and injury, not adaptation. The paces will get faster as VDOT improves across phases.</div>
+        <div class="science-cite">Daniels, J. (2014). Daniels' Running Formula, 3rd Edition. Human Kinetics.</div>
       </div>
       <div class="science-block">
-        <div class="science-title">Concurrent Training</div>
-        <div class="science-text">Cutting strength sessions from 5–7 to 3 during this phase reduces interference effect, the phenomenon where excessive strength volume blunts endurance adaptation. Three sessions per week maintains muscle mass and strength without competing with aerobic development.</div>
-        <div class="science-cite">Wilson, J.M. et al. (2012). Concurrent training: a meta-analysis examining interference of aerobic and resistance exercises. Journal of Strength and Conditioning Research, 26(8), 2293–2307.</div>
+        <div class="science-title">Why Threshold Runs Every Week</div>
+        <div class="science-text">Threshold pace (8:40–8:55/mi at your current VDOT) is the single most effective session for marathon performance. It raises your lactate threshold, the pace at which lactate accumulates faster than you can clear it. Previous plans alternated threshold and intervals every other week. That means roughly one hard quality session per 14 days. Daniels and Pfitzinger both show weekly threshold work is the minimum effective dose for meaningful marathon improvement. The previous plan was not enough.</div>
+      </div>
+      <div class="science-block">
+        <div class="science-title">Why Strides After Easy Runs</div>
+        <div class="science-text">Strides (4×20 second controlled accelerations after easy runs) develop neuromuscular speed and running economy without accumulating aerobic fatigue. Research consistently shows that runners who include strides maintain faster leg turnover at all paces. They take 3 minutes. They are not optional.</div>
+      </div>
+      <div class="science-block">
+        <div class="science-title">Concurrent Training and Strength</div>
+        <div class="science-text">Three gym sessions during Barcelona balances strength maintenance against endurance adaptation. Excessive strength volume blunts the mitochondrial signaling that endurance training creates. Dropping to zero loses muscle critical for running economy and HYROX performance. Three sessions is the evidence-based sweet spot for concurrent training.</div>
+        <div class="science-cite">Wilson, J.M. et al. (2012). Concurrent training: a meta-analysis. Journal of Strength and Conditioning Research, 26(8), 2293–2307.</div>
+      </div>
+    </div>
+    <div class="sub-content" id="p1-nutrition">
+      <div class="nutrition-grid">
+        <div class="nutrition-card">
+          <div class="nutrition-card-title">Estimated Calories</div>
+          <div class="nutrition-card-val">2,200–2,600</div>
+          <div class="nutrition-card-desc">Realistic estimate for Barcelona without tracking. Mediterranean portions, restaurant eating, and an active daily schedule. Don't stress the number. Watch bodyweight weekly. If dropping, eat more.</div>
+        </div>
+        <div class="nutrition-card">
+          <div class="nutrition-card-title">Protein Priority</div>
+          <div class="nutrition-card-val">0.7–0.8g/lb</div>
+          <div class="nutrition-card-desc">Harder to hit in Europe without cooking. Anchor every meal with protein: eggs, fish, chicken, Greek yogurt. Even if total calories are uncertain, protein should not be an afterthought.</div>
+        </div>
+        <div class="nutrition-card">
+          <div class="nutrition-card-title">Pre-Long Effort</div>
+          <div class="nutrition-card-val">Carb-heavy meal</div>
+          <div class="nutrition-card-desc">Night before Saturday ride and open water swim. Pasta, bread, rice. Don't overthink it. Spanish cuisine makes this easy.</div>
+        </div>
+        <div class="nutrition-card">
+          <div class="nutrition-card-title">Tracking</div>
+          <div class="nutrition-card-val">Weekly weight</div>
+          <div class="nutrition-card-desc">Don't log every meal in Barcelona. Instead weigh in weekly. If weight drops more than 1lb/week, something is wrong. Eat more. If stable or gaining slightly, you're fine.</div>
+        </div>
       </div>
     </div>
   </div>
+
 
   <!-- PHASE 1.5 -->
   <div class="phase-content" id="p15">
@@ -306,119 +409,6 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
       <h2 class="phase-title">Nashville Window</h2>
       <p class="phase-meta">No target race · Highest volume block of the year · Zero constraints</p>
       <p class="phase-desc">Nashville is the one block where everything lines up. Five weeks to build something real before school takes over.</p>
-    </div>
-
-    <div class="sub-tabs">
-      <div class="sub-tab active" onclick="switchSub('p15-schedule',this,'p15')">Weekly Schedule</div>
-      <div class="sub-tab" onclick="switchSub('p15-science',this,'p15')">Science</div>
-      <div class="sub-tab" onclick="switchSub('p15-nutrition',this,'p15')">Nutrition</div>
-    </div>
-
-    <div class="sub-content active" id="p15-schedule">
-      <div class="week-legend"><div class="week-legend-instruction">Tap a card to see workout</div>
-        <div class="legend-item"><div class="legend-dot dot-run"></div>Run</div>
-        <div class="legend-item"><div class="legend-dot dot-swim"></div>Swim</div>
-        <div class="legend-item"><div class="legend-dot dot-bike"></div>Bike</div>
-        <div class="legend-item"><div class="legend-dot dot-strength"></div>Strength</div>
-        <div class="legend-item"><div class="legend-dot dot-combo"></div>Combo</div>
-        <div class="legend-item"><div class="legend-dot dot-rest"></div>Rest</div>
-      </div>
-      <div class="week-grid">
-        <div class="flip-card type-combo" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Monday</span><span class="flip-title">AM Strength + PM Run</span><span class="flip-type">Combo</span></div>
-            <div class="flip-back"><span class="flip-day">Monday</span><span class="flip-detail">AM: Full body strength, heavy compound lifts. PM: 45–60 min Zone 2 run on greenway trails.</span><span class="flip-tap">tap to flip</span></div>
-          </div>
-        </div>
-        <div class="flip-card type-combo" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Tuesday</span><span class="flip-title">Long Swim + Bike</span><span class="flip-type">Combo</span></div>
-            <div class="flip-back"><span class="flip-day">Tuesday</span><span class="flip-detail">Morning pool: 2,500–3,000m technique and aerobic. Afternoon: 90 min Zone 2 ride.</span><span class="flip-tap">tap to flip</span></div>
-          </div>
-        </div>
-        <div class="flip-card type-run" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Wednesday</span><span class="flip-title">Long Trail Run</span><span class="flip-type">Run</span></div>
-            <div class="flip-back"><span class="flip-day">Wednesday</span><span class="flip-detail">14–18 miles on Nashville greenways. 60–90 sec/mile slower than goal pace. Carb load the night before.</span><span class="flip-tap">tap to flip</span></div>
-          </div>
-        </div>
-        <div class="flip-card type-combo" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Thursday</span><span class="flip-title">AM Strength + PM Swim</span><span class="flip-type">Combo</span></div>
-            <div class="flip-back"><span class="flip-day">Thursday</span><span class="flip-detail">AM: Push/pull split, accessory work. PM: 2,000m swim focused on open water technique.</span><span class="flip-tap">tap to flip</span></div>
-          </div>
-        </div>
-        <div class="flip-card type-run" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Friday</span><span class="flip-title">Threshold Run</span><span class="flip-type">Run</span></div>
-            <div class="flip-back"><span class="flip-day">Friday</span><span class="flip-detail">45 min with 20–25 min at comfortably hard effort. Or 6×800m intervals on a flat stretch.</span><span class="flip-tap">tap to flip</span></div>
-          </div>
-        </div>
-        <div class="flip-card type-combo" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Saturday</span><span class="flip-title">Long Ride + Brick Run</span><span class="flip-type">Combo</span></div>
-            <div class="flip-back"><span class="flip-day">Saturday</span><span class="flip-detail">2–2.5 hour Zone 2 ride immediately into 20–30 min easy run. First real brick of the plan.</span><span class="flip-tap">tap to flip</span></div>
-          </div>
-        </div>
-        <div class="flip-card type-rest" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Sunday</span><span class="flip-title">Full Rest</span><span class="flip-type">Rest</span></div>
-            <div class="flip-back"><span class="flip-day">Sunday</span><span class="flip-detail">Nothing. Sleep 8–9 hours. Eat well. Let the week absorb.</span><span class="flip-tap">tap to flip</span></div>
-          </div>
-        </div>
-      </div>
-      <p style="font-size:13px;color:var(--accent);font-style:italic;margin-top:1rem">Deload on week 3. Cut all volume 30–40%. Body needs it even when motivation is high.</p>
-      <p style="font-size:13px;color:var(--ink3);font-style:italic;margin-top:0.5rem">MD parents on hand. Any nagging pain, tightness, or unusual fatigue gets looked at immediately. Do not ignore things here.</p>
-    </div>
-
-    <div class="sub-content" id="p15-science">
-      <div class="science-block">
-        <div class="science-title">Why This Block Matters Most</div>
-        <div class="science-text">Fitness adaptations from endurance training take 10–14 days to fully express. Everything built in Nashville between July 20 and August 23 will be showing up on race day in Indianapolis on November 7. This is the highest-leverage window in the entire plan because it has the fewest competing demands and the best recovery infrastructure.</div>
-      </div>
-      <div class="science-block">
-        <div class="science-title">Two-a-Days and Recovery</div>
-        <div class="science-text">Two-a-day sessions are productive only when recovery is adequate. Home food, a real kitchen hitting protein targets, consistent sleep in a familiar bed, and no internship stress means the recovery conditions here are better than any other phase. That is what makes the double sessions viable. The same schedule in Barcelona or during ICORE would lead to breakdown.</div>
-      </div>
-      <div class="science-block">
-        <div class="science-title">Brick Workouts Starting Now</div>
-        <div class="science-text">Introducing brick workouts in this phase builds the neuromuscular transition pattern early. By the time Augusta arrives, the bike-to-run switch should feel automatic rather than disorienting. Starting in Nashville means 14 months of brick adaptation before race day.</div>
-      </div>
-    </div>
-
-    <div class="sub-content" id="p15-nutrition">
-      <div class="nutrition-grid">
-        <div class="nutrition-card">
-          <div class="nutrition-card-title">Base Calories</div>
-          <div class="nutrition-card-val">3,100–3,400</div>
-          <div class="nutrition-card-desc">Highest caloric intake of the plan. Two-a-days demand it. Home kitchen makes it easy to hit. Do not undereat here.</div>
-        </div>
-        <div class="nutrition-card">
-          <div class="nutrition-card-title">Protein</div>
-          <div class="nutrition-card-val">0.9g/lb</div>
-          <div class="nutrition-card-desc">Upper end of target. Two strength sessions on Monday and Thursday require it. Hit this every day.</div>
-        </div>
-        <div class="nutrition-card">
-          <div class="nutrition-card-title">Pre-Long Run Carbs</div>
-          <div class="nutrition-card-val">2.7–4.5g/lb</div>
-          <div class="nutrition-card-desc">Night before Wednesday long run every week. Home kitchen makes this the easiest phase to nail carb loading.</div>
-        </div>
-        <div class="nutrition-card">
-          <div class="nutrition-card-title">Pre-Sleep Casein</div>
-          <div class="nutrition-card-val">Every night</div>
-          <div class="nutrition-card-desc">Greek yogurt or milk. Two-a-day sessions create more overnight repair demand than single sessions. Non-negotiable here.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PHASE 1.5 -->
-  <div class="phase-content" id="p15">
-    <div class="phase-header">
-      <p class="phase-label">Phase 1.5 · Jul 20 → Aug 23, 2026 · 5 Weeks</p>
-      <h2 class="phase-title">Nashville Window</h2>
-      <p class="phase-meta">No target race · Maximum load block · Bank fitness before ICORE</p>
-      <p class="phase-desc">The best training window of the entire year. No internship, no time zone complications, full gym access, open roads, greenway trails, a real pool, home food and kitchen, and two MDs in the house for anything that needs attention. This is the one block where there are zero excuses. Train accordingly. Whatever fitness gets built here is the bank account Phase 2 draws from when ICORE and 6 credit hours are running simultaneously.</p>
     </div>
 
     <div class="sub-tabs">
@@ -437,65 +427,125 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
         <div class="legend-item"><div class="legend-dot dot-rest"></div>Rest</div>
       </div>
       <div class="week-grid">
-        <div class="flip-card type-combo" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-combo" onclick="flipCard(this)">
           <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Monday</span><span class="flip-title">AM Strength A + PM Run</span><span class="flip-type">Combo</span></div>
-            <div class="flip-back"><span class="flip-day">Monday</span><span class="flip-detail">AM: Push + core. Heavy. PM: Zone 2 run 50–60 min on the greenway.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-front"><span class="flip-day">Monday</span><span class="flip-title">Stunna Push + Easy Run</span><span class="flip-type">Combo</span></div>
+            <div class="flip-back"><span class="flip-day">Monday</span><span class="flip-detail">Normal Stunna Push day, then add: band pull-aparts 3×15, face pulls 3×15. Then 45–55 min easy at 10:00–10:30/mi. Add 4×20 sec strides at the end. These matter. Don't skip them.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-combo" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-run" onclick="flipCard(this)">
           <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Tuesday</span><span class="flip-title">AM Swim + PM Bike</span><span class="flip-type">Combo</span></div>
-            <div class="flip-back"><span class="flip-day">Tuesday</span><span class="flip-detail">AM: Pool swim 2,500–3,000m with technique focus. PM: Zone 2 bike 60–75 min.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-front"><span class="flip-day">Tuesday</span><span class="flip-title">800m Intervals</span><span class="flip-type">Run</span></div>
+            <div class="flip-back"><span class="flip-day">Tuesday</span><span class="flip-detail">Warmup 10 min easy. Then 5–6×800m at 8:15–8:30/mi with equal jog recovery. Cooldown 10 min. This is your VO2max session. Hard but controlled. Never a sprint.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-combo" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-combo" onclick="flipCard(this)">
           <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Wednesday</span><span class="flip-title">AM Strength B + PM Intervals</span><span class="flip-type">Combo</span></div>
-            <div class="flip-back"><span class="flip-day">Wednesday</span><span class="flip-detail">AM: Pull + posterior chain. PM: 6×800m or 4×1 mile at threshold. Nashville greenway.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-front"><span class="flip-day">Wednesday</span><span class="flip-title">Stunna Pull + Swim</span><span class="flip-type">Combo</span></div>
+            <div class="flip-back"><span class="flip-day">Wednesday</span><span class="flip-detail">Normal Stunna Pull day, then add: lat pulldown 3×12, single-arm row 3×12. Pool swim: 1,000m wk 1 building to 1,800m wk 5. Technique first, always.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-combo" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-run" onclick="flipCard(this)">
           <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Thursday</span><span class="flip-title">AM Swim + PM Easy Run</span><span class="flip-type">Combo</span></div>
-            <div class="flip-back"><span class="flip-day">Thursday</span><span class="flip-detail">AM: 2,000–2,500m continuous. PM: 40 min easy shake out.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-front"><span class="flip-day">Thursday</span><span class="flip-title">Threshold Run</span><span class="flip-type">Run</span></div>
+            <div class="flip-back"><span class="flip-day">Thursday</span><span class="flip-detail">Warmup 10 min. 25–30 min at 8:40–8:55/mi, comfortably hard, short phrases only. Cooldown 10 min. Every week, not alternating. This closes the gap to 3:30–3:45.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-combo" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-strength" onclick="flipCard(this)">
           <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Friday</span><span class="flip-title">AM Strength C + PM Tempo</span><span class="flip-type">Combo</span></div>
-            <div class="flip-back"><span class="flip-day">Friday</span><span class="flip-detail">AM: Full body accessory work. PM: 35–40 min tempo run. Comfortably hard effort.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-front"><span class="flip-day">Friday</span><span class="flip-title">Stunna Legs</span><span class="flip-type">Strength</span></div>
+            <div class="flip-back"><span class="flip-day">Friday</span><span class="flip-detail">Normal Stunna Legs day, then add: single-leg RDL 3×10, calf raises 4×20, hip flexor circuit. Optional 20 min easy shakeout after if legs feel good. No intensity today.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-combo" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-run" onclick="flipCard(this)">
           <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Saturday</span><span class="flip-title">Long Run + Long Ride</span><span class="flip-type">Combo</span></div>
-            <div class="flip-back"><span class="flip-day">Saturday</span><span class="flip-detail">AM: Long run 14–18 miles on trail. PM: 90–120 min Zone 2 ride. Biggest day of the week.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-front"><span class="flip-day">Saturday</span><span class="flip-title">Structured Long Run</span><span class="flip-type">Run</span></div>
+            <div class="flip-back"><span class="flip-day">Saturday</span><span class="flip-detail">Wks 1–2: 14 mi · Wks 3–4: 16 mi · Wk 5: 18 mi. Pacing: 10:00–10:30/mi for first 80%. Final 3–4 miles at 8:15–8:30/mi (goal marathon pace). Most important session of the week. Carb load Friday night.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-rest" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-rest" onclick="flipCard(this)">
           <div class="flip-card-inner">
             <div class="flip-front"><span class="flip-day">Sunday</span><span class="flip-title">Full Rest</span><span class="flip-type">Rest</span></div>
-            <div class="flip-back"><span class="flip-day">Sunday</span><span class="flip-detail">Nothing. Home food. Sleep. Let the MD parents check anything that felt off.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-back"><span class="flip-day">Sunday</span><span class="flip-detail">Nothing. Home food. Sleep. Long run adaptation happens in the 48 hours after, not during.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
       </div>
-      <p style="font-size:13px;color:var(--accent);font-style:italic;margin-top:1rem">Deload week 3 of this block. Cut volume 30–40%. Still two-a-days but shorter and easier.</p>
-      <p style="font-size:13px;color:var(--ink3);font-style:italic;margin-top:0.5rem">Classes start Aug 24. Final week of this phase (Aug 17–23) begins tapering intensity to land fresh for the academic start.</p>
+      <p style="font-size:13px;color:var(--accent);font-style:italic;margin-top:1rem">Deload week 3. Cut all volume 30–40%. Still lift but shorter and lighter.</p>
+      <p style="font-size:13px;color:var(--ink3);font-style:italic;margin-top:0.5rem">Swim progression is intentional. 1,000m building to 1,800m over 5 weeks is science-backed for untrained swimmers. Do not jump ahead.</p>
+      <p style="font-size:13px;color:var(--ink3);font-style:italic;margin-top:0.5rem">Classes start Aug 24. Final week tapers intensity to arrive fresh.</p>
+      <div style="margin-top:2rem;overflow-x:auto">
+        <p style="font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:12px">Pace Reference · VDOT 38–39 · Target 3:30–3:45</p>
+        <table style="width:100%;border-collapse:collapse;font-family:var(--sans);font-size:12px;min-width:520px">
+          <thead><tr style="border-bottom:2px solid var(--ink)">
+            <th style="text-align:left;padding:8px 12px 8px 0;font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3)">Zone</th>
+            <th style="text-align:left;padding:8px 12px;font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3)">Pace (min/mi)</th>
+            <th style="text-align:left;padding:8px 12px;font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3)">Effort</th>
+            <th style="text-align:left;padding:8px 12px;font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3)">When</th>
+            <th style="text-align:left;padding:8px 0;font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3)">Purpose</th>
+          </tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Easy (E)</span></td>
+              <td style="padding:9px 12px;font-weight:500;color:var(--ink)">10:15 – 10:45</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Full conversation</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Mon + Thu</td>
+              <td style="padding:9px 0;color:var(--ink2);font-weight:300">Aerobic base, recovery</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);background:rgba(25,42,85,0.02)">
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Long (L)</span></td>
+              <td style="padding:9px 12px;font-weight:500;color:var(--ink)">10:00 – 10:30</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Comfortable, short sentences</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Sat first 80%</td>
+              <td style="padding:9px 0;color:var(--ink2);font-weight:300">Endurance, fat oxidation</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Marathon (M)</span></td>
+              <td style="padding:9px 12px;font-weight:500;color:var(--ink)">8:15 – 8:30</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Controlled hard, race effort</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Sat final 3–4 mi</td>
+              <td style="padding:9px 0;color:var(--ink2);font-weight:300">Race rehearsal, pacing</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);background:rgba(25,42,85,0.02)">
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Threshold (T)</span></td>
+              <td style="padding:9px 12px;font-weight:500;color:var(--ink)">8:40 – 8:55</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Comfortably hard, short phrases</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Wed every week</td>
+              <td style="padding:9px 0;color:var(--ink2);font-weight:300">Lactate threshold. Biggest PR lever</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Interval (I)</span></td>
+              <td style="padding:9px 12px;font-weight:500;color:var(--ink)">8:15 – 8:30</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Hard, 2–3 words max</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Tue 800m repeats</td>
+              <td style="padding:9px 0;color:var(--ink2);font-weight:300">VO2max development</td>
+            </tr>
+            <tr>
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Strides (R)</span></td>
+              <td style="padding:9px 12px;font-weight:500;color:var(--ink)">7:00 – 7:30</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Fast, controlled, 20 sec</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">After Mon + Thu</td>
+              <td style="padding:9px 0;color:var(--ink2);font-weight:300">Speed, running economy</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size:11px;color:var(--ink3);margin-top:10px;font-style:italic">Recalibrate every 4–6 weeks. Target VDOT 44–46 by Indianapolis. These paces will get faster.</p>
+      </div>
+
     </div>
 
     <div class="sub-content" id="p15-science">
       <div class="science-block">
         <div class="science-title">Why Two-A-Days Work Here</div>
-        <div class="science-text">Two-a-day training sessions are effective when recovery infrastructure is in place. Home cooking means hitting protein and carb targets consistently. Home bed means real sleep. No work commute or internship obligations means training can be structured around recovery windows, not around a calendar. This is the exact environment where two-a-days produce adaptation rather than breakdown.</div>
+        <div class="science-text">Two-a-day sessions are productive only when recovery is adequate. Home food, a real kitchen hitting protein targets, consistent sleep in a familiar bed, and no internship stress means the recovery conditions here are better than any other phase. That is what makes the double sessions viable. The same schedule in Barcelona or during ICORE would lead to breakdown.</div>
       </div>
       <div class="science-block">
-        <div class="science-title">Trail Running Advantage</div>
-        <div class="science-text">Nashville greenway trail running builds proprioception, ankle stability, and glute activation that road running does not. The uneven surface recruits stabilizer muscles and reduces impact force per stride, which means lower injury risk despite higher volume. Use this window to build trail mileage before returning to Bloomington roads.</div>
+        <div class="science-title">Swim Progression for Untrained Swimmers</div>
+        <div class="science-text">Costill et al. established that untrained swimmers need 6–8 weeks of technique-first work before volume meaningfully improves fitness. Starting at 800m in short sets and building to 1,800m over 5 weeks follows this. The risk of jumping to 2,000m+ immediately is compensatory stroke mechanics that cause shoulder impingement, one of the most common triathlon injuries and one of the slowest to heal.</div>
+        <div class="science-cite">Costill, D.L. et al. (1991). Adaptations to swimming training: influence of training volume. Medicine and Science in Sports and Exercise, 23(3), 371–377.</div>
       </div>
       <div class="science-block">
         <div class="science-title">MD Access as a Training Asset</div>
-        <div class="science-text">Any soft tissue issue, unusual fatigue, or pain that changes gait gets looked at immediately rather than trained through. Two physicians at home means nothing festers for two weeks before getting attention. Use this. It is a genuine competitive advantage most athletes do not have.</div>
+        <div class="science-text">Any soft tissue issue, unusual fatigue, or pain that changes gait gets looked at immediately rather than trained through. Two physicians at home means nothing festers. Use this. It is a genuine competitive advantage.</div>
       </div>
     </div>
 
@@ -504,22 +554,22 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
         <div class="nutrition-card">
           <div class="nutrition-card-title">Base Calories</div>
           <div class="nutrition-card-val">3,100–3,400</div>
-          <div class="nutrition-card-desc">Highest calorie phase of the plan given two-a-day volume. Home kitchen makes this achievable. Undereating is the real enemy here — log every day in MyNetDiary and actually hit the number.</div>
+          <div class="nutrition-card-desc">Highest caloric intake of the plan. Two-a-days demand it. Home kitchen makes it easy to hit. Log daily in MyNetDiary. Do not undereat here.</div>
         </div>
         <div class="nutrition-card">
           <div class="nutrition-card-title">Protein</div>
           <div class="nutrition-card-val">0.9g/lb</div>
-          <div class="nutrition-card-desc">Upper end of the target given strength volume. Real food sources. Eggs, chicken, Greek yogurt, milk.</div>
+          <div class="nutrition-card-desc">Upper end of target. Four gym sessions per week require it. Eggs, chicken, Greek yogurt, milk every day.</div>
         </div>
         <div class="nutrition-card">
-          <div class="nutrition-card-title">Long Run Carb Load</div>
+          <div class="nutrition-card-title">Pre-Long Run Carbs</div>
           <div class="nutrition-card-val">2.7–4.5g/lb</div>
-          <div class="nutrition-card-desc">Night before every Saturday long run. Home kitchen means pasta, rice, and bread are easy to hit this.</div>
+          <div class="nutrition-card-desc">Night before Thursday long run every week. Home kitchen makes this the easiest phase to nail carb loading.</div>
         </div>
         <div class="nutrition-card">
           <div class="nutrition-card-title">Pre-Sleep Casein</div>
-          <div class="nutrition-card-val">Every Night</div>
-          <div class="nutrition-card-desc">Greek yogurt or milk before bed. Two-a-days mean overnight repair matters even more than usual.</div>
+          <div class="nutrition-card-val">Every night</div>
+          <div class="nutrition-card-desc">Greek yogurt or milk. Two-a-day sessions create more overnight repair demand. Non-negotiable here.</div>
         </div>
       </div>
     </div>
@@ -550,49 +600,108 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
         <div class="legend-item"><div class="legend-dot dot-rest"></div>Rest</div>
       </div>
       <div class="week-grid">
-        <div class="flip-card type-run" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-combo" onclick="flipCard(this)">
           <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Monday</span><span class="flip-title">Easy Run</span><span class="flip-type">Run</span></div>
-            <div class="flip-back"><span class="flip-day">Monday</span><span class="flip-detail">45–60 min Zone 2. Recovery from weekend long run.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-front"><span class="flip-day">Monday</span><span class="flip-title">Stunna Push + Easy Run</span><span class="flip-type">Combo</span></div>
+            <div class="flip-back"><span class="flip-day">Monday</span><span class="flip-detail">Normal Stunna Push day, then add: band pull-aparts 3×15, face pulls 3×15. Then 40–50 min easy at 10:00–10:30/mi. Add 4×20 sec strides. Recovery from weekend long run.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-strength" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-run" onclick="flipCard(this)">
           <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Tuesday</span><span class="flip-title">Strength</span><span class="flip-type">Strength</span></div>
-            <div class="flip-back"><span class="flip-day">Tuesday</span><span class="flip-detail">Full body maintenance. Keep weight on the bar.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-front"><span class="flip-day">Tuesday</span><span class="flip-title">800m Intervals</span><span class="flip-type">Run</span></div>
+            <div class="flip-back"><span class="flip-day">Tuesday</span><span class="flip-detail">Warmup 10 min. 5–6×800m at 8:15–8:30/mi with equal jog recovery. Cooldown 10 min. ICORE deadline week: replace with 40 min easy Zone 2 only.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-run" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-swim" onclick="flipCard(this)">
           <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Wednesday</span><span class="flip-title">Threshold / Intervals</span><span class="flip-type">Run</span></div>
-            <div class="flip-back"><span class="flip-day">Wednesday</span><span class="flip-detail">Alternating weeks: 30 min threshold run OR 6×800m at 5K effort.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-front"><span class="flip-day">Wednesday</span><span class="flip-title">Swim</span><span class="flip-type">Swim</span></div>
+            <div class="flip-back"><span class="flip-day">Wednesday</span><span class="flip-detail">Continuing Nashville progression. 1,800–2,200m building through the phase in short sets. Technique still first. 14 months from Augusta.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-swim" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-run" onclick="flipCard(this)">
           <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Thursday</span><span class="flip-title">Swim</span><span class="flip-type">Swim</span></div>
-            <div class="flip-back"><span class="flip-day">Thursday</span><span class="flip-detail">2,000–2,500m. Keep triathlon base alive.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-front"><span class="flip-day">Thursday</span><span class="flip-title">Threshold Run</span><span class="flip-type">Run</span></div>
+            <div class="flip-back"><span class="flip-day">Thursday</span><span class="flip-detail">Warmup 10 min. 25–30 min at 8:40–8:55/mi. Cooldown 10 min. Every week. ICORE deadline week: drop to 30 min easy with strides only.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-run" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-combo" onclick="flipCard(this)">
           <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Friday</span><span class="flip-title">Easy Run or Rest</span><span class="flip-type">Run</span></div>
-            <div class="flip-back"><span class="flip-day">Friday</span><span class="flip-detail">30–40 min shakeout. Or full rest if fatigued.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-front"><span class="flip-day">Friday</span><span class="flip-title">Stunna Pull + Legs</span><span class="flip-type">Combo</span></div>
+            <div class="flip-back"><span class="flip-day">Friday</span><span class="flip-detail">Normal Stunna Pull day, then add: lat pulldown 3×12, single-arm row 3×12. Then Normal Stunna Legs day, then add: single-leg RDL 3×10, calf raises 4×20. Two in one since Saturday is the big day.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-run" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-run" onclick="flipCard(this)">
           <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Saturday</span><span class="flip-title">Long Run</span><span class="flip-type">Run</span></div>
-            <div class="flip-back"><span class="flip-day">Saturday</span><span class="flip-detail">Wks 1–3: 14–16mi · Wks 4–6: 16–18mi · Wks 7–8: 18–20mi · Taper: 10–12mi. Always 60–90 sec/mi slower than goal pace.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-front"><span class="flip-day">Saturday</span><span class="flip-title">Structured Long Run</span><span class="flip-type">Run</span></div>
+            <div class="flip-back"><span class="flip-day">Saturday</span><span class="flip-detail">Wks 1–3: 14–16 mi · Wks 4–6: 16–18 mi · Wks 7–8: 18–20 mi · Taper wk: 10–12 mi. Pace: 10:00–10:30/mi first 80%. Final 3–4 mi at 8:15–8:30/mi (goal pace). Carb load Friday night. This session is non-negotiable.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-bike" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-bike" onclick="flipCard(this)">
           <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Sunday</span><span class="flip-title">Long Bike</span><span class="flip-type">Bike</span></div>
-            <div class="flip-back"><span class="flip-day">Sunday</span><span class="flip-detail">90–120 min Zone 2 ride. Keeps triathlon base building.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-front"><span class="flip-day">Sunday</span><span class="flip-title">Easy Bike</span><span class="flip-type">Bike</span></div>
+            <div class="flip-back"><span class="flip-day">Sunday</span><span class="flip-detail">60–90 min Zone 2 ride. Active recovery and triathlon base. Easy effort only. You ran long yesterday. This is not optional; bike base now saves pain at Augusta.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
       </div>
+      <p style="font-size:13px;color:var(--ink3);font-style:italic;margin-top:1rem">ICORE override: major deadline week drops all intensity. Keep only Zone 2 run and one swim. The degree is not worth the injury.</p>
+      <div style="margin-top:2rem;overflow-x:auto">
+        <p style="font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:12px">Pace Reference · VDOT 38–39 · Target 3:30–3:45</p>
+        <table style="width:100%;border-collapse:collapse;font-family:var(--sans);font-size:12px;min-width:520px">
+          <thead><tr style="border-bottom:2px solid var(--ink)">
+            <th style="text-align:left;padding:8px 12px 8px 0;font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3)">Zone</th>
+            <th style="text-align:left;padding:8px 12px;font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3)">Pace (min/mi)</th>
+            <th style="text-align:left;padding:8px 12px;font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3)">Effort</th>
+            <th style="text-align:left;padding:8px 12px;font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3)">When</th>
+            <th style="text-align:left;padding:8px 0;font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3)">Purpose</th>
+          </tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Easy (E)</span></td>
+              <td style="padding:9px 12px;font-weight:500;color:var(--ink)">10:15 – 10:45</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Full conversation</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Mon + Thu</td>
+              <td style="padding:9px 0;color:var(--ink2);font-weight:300">Aerobic base, recovery</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);background:rgba(25,42,85,0.02)">
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Long (L)</span></td>
+              <td style="padding:9px 12px;font-weight:500;color:var(--ink)">10:00 – 10:30</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Comfortable, short sentences</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Sat first 80%</td>
+              <td style="padding:9px 0;color:var(--ink2);font-weight:300">Endurance, fat oxidation</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Marathon (M)</span></td>
+              <td style="padding:9px 12px;font-weight:500;color:var(--ink)">8:15 – 8:30</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Controlled hard, race effort</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Sat final 3–4 mi</td>
+              <td style="padding:9px 0;color:var(--ink2);font-weight:300">Race rehearsal, pacing</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);background:rgba(25,42,85,0.02)">
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Threshold (T)</span></td>
+              <td style="padding:9px 12px;font-weight:500;color:var(--ink)">8:40 – 8:55</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Comfortably hard, short phrases</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Wed every week</td>
+              <td style="padding:9px 0;color:var(--ink2);font-weight:300">Lactate threshold. Biggest PR lever</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Interval (I)</span></td>
+              <td style="padding:9px 12px;font-weight:500;color:var(--ink)">8:15 – 8:30</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Hard, 2–3 words max</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Tue 800m repeats</td>
+              <td style="padding:9px 0;color:var(--ink2);font-weight:300">VO2max development</td>
+            </tr>
+            <tr>
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Strides (R)</span></td>
+              <td style="padding:9px 12px;font-weight:500;color:var(--ink)">7:00 – 7:30</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Fast, controlled, 20 sec</td>
+              <td style="padding:9px 12px;color:var(--ink2);font-weight:300">After Mon + Thu</td>
+              <td style="padding:9px 0;color:var(--ink2);font-weight:300">Speed, running economy</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size:11px;color:var(--ink3);margin-top:10px;font-style:italic">Recalibrate every 4–6 weeks. Target VDOT 44–46 by Indianapolis. These paces will get faster.</p>
+      </div>
+
       <p style="font-size:13px;color:var(--ink3);font-style:italic;margin-top:1rem">ICORE override: major deadline week drops all intensity. Keep only Zone 2 run and one swim. No exceptions.</p>
       <p style="font-size:13px;color:var(--ink3);font-style:italic;margin-top:0.5rem">6 credit hours run the full semester alongside ICORE. Schedule workouts around class, not the other way around.</p>
     </div>
@@ -659,43 +768,43 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
         <div class="legend-item"><div class="legend-dot dot-rest"></div>Rest</div>
       </div>
       <div class="week-grid">
-        <div class="flip-card type-rest" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-rest" onclick="flipCard(this)">
           <div class="flip-card-inner">
             <div class="flip-front"><span class="flip-day">Wks 1–2</span><span class="flip-title">Active Recovery</span><span class="flip-type">Rest</span></div>
             <div class="flip-back"><span class="flip-day">Wks 1–2</span><span class="flip-detail">No running. Walking, light swimming, mobility only. Body needs this.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-strength" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-strength" onclick="flipCard(this)">
           <div class="flip-card-inner">
             <div class="flip-front"><span class="flip-day">Wks 3–4</span><span class="flip-title">HYROX Intro</span><span class="flip-type">Strength</span></div>
             <div class="flip-back"><span class="flip-day">Wks 3–4</span><span class="flip-detail">Easy running returns. Ski erg, sled push/pull, burpee broad jumps, rowing, sandbag lunges, wall balls.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-combo" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-combo" onclick="flipCard(this)">
           <div class="flip-card-inner">
             <div class="flip-front"><span class="flip-day">Wks 5–8</span><span class="flip-title">Long Run Cap</span><span class="flip-type">Combo</span></div>
             <div class="flip-back"><span class="flip-day">Wks 5–8</span><span class="flip-detail">Max 14 miles. 3 swims per week. Two bike rides: 90 min + 2 hours.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-strength" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-strength" onclick="flipCard(this)">
           <div class="flip-card-inner">
             <div class="flip-front"><span class="flip-day">Dec 10–13</span><span class="flip-title">HYROX Nashville</span><span class="flip-type">Race</span></div>
             <div class="flip-back"><span class="flip-day">Dec 10–13</span><span class="flip-detail">Completion goal only. Finish strong. Don't race it.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-run" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-run" onclick="flipCard(this)">
           <div class="flip-card-inner">
             <div class="flip-front"><span class="flip-day">Dec–Jan</span><span class="flip-title">Miami Build</span><span class="flip-type">Run</span></div>
             <div class="flip-back"><span class="flip-day">Dec–Jan</span><span class="flip-detail">Continue easy running. Miami is a fun run. Show up fit, not peaked.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-run" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-run" onclick="flipCard(this)">
           <div class="flip-card-inner">
             <div class="flip-front"><span class="flip-day">Jan 31</span><span class="flip-title">Miami Marathon</span><span class="flip-type">Race</span></div>
             <div class="flip-back"><span class="flip-day">Jan 31</span><span class="flip-detail">Fitness day with a bib. Run by feel. Enjoy it.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-swim" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-swim" onclick="flipCard(this)">
           <div class="flip-card-inner">
             <div class="flip-front"><span class="flip-day">Throughout</span><span class="flip-title">Swim Volume</span><span class="flip-type">Swim</span></div>
             <div class="flip-back"><span class="flip-day">Throughout</span><span class="flip-detail">3 sessions per week building Augusta base. Most important training of this block.</span><span class="flip-tap">tap to flip</span></div>
@@ -742,49 +851,52 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
         <div class="legend-item"><div class="legend-dot dot-rest"></div>Rest</div>
       </div>
       <div class="week-grid">
-        <div class="flip-card type-rest" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-rest" onclick="flipCard(this)">
           <div class="flip-card-inner">
             <div class="flip-front"><span class="flip-day">Monday</span><span class="flip-title">Rest / Mobility</span><span class="flip-type">Rest</span></div>
-            <div class="flip-back"><span class="flip-day">Monday</span><span class="flip-detail">Full recovery. Stretch, foam roll, sleep.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-back"><span class="flip-day">Monday</span><span class="flip-detail">Full recovery. Stretch, foam roll, sleep. Body needs this after Sunday long run.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-combo" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-combo" onclick="flipCard(this)">
           <div class="flip-card-inner">
             <div class="flip-front"><span class="flip-day">Tuesday</span><span class="flip-title">Swim + Intervals</span><span class="flip-type">Combo</span></div>
-            <div class="flip-back"><span class="flip-day">Tuesday</span><span class="flip-detail">Masters swim 2,500–3,500m. Then interval run: 5×1000m at 5K effort.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-back"><span class="flip-day">Tuesday</span><span class="flip-detail">Masters swim 2,500–3,500m building through phase. Then interval run: 5×1000m at 5K effort.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-bike" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-bike" onclick="flipCard(this)">
           <div class="flip-card-inner">
             <div class="flip-front"><span class="flip-day">Wednesday</span><span class="flip-title">Long Ride</span><span class="flip-type">Bike</span></div>
-            <div class="flip-back"><span class="flip-day">Wednesday</span><span class="flip-detail">Building from 2.5 to 4 hours over the block. Zone 2 base with some tempo efforts later.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-back"><span class="flip-day">Wednesday</span><span class="flip-detail">Building from 2.5 to 4 hours over the block. Zone 2 base with some tempo efforts in later weeks.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-strength" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-combo" onclick="flipCard(this)">
           <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Thursday</span><span class="flip-title">Strength / HYROX</span><span class="flip-type">Strength</span></div>
-            <div class="flip-back"><span class="flip-day">Thursday</span><span class="flip-detail">Alternating weeks. Maintain muscle. Don't lose the strength from earlier phases.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-front"><span class="flip-day">Thursday</span><span class="flip-title">Stunna Push + Pull</span><span class="flip-type">Combo</span></div>
+            <div class="flip-back"><span class="flip-day">Thursday</span><span class="flip-detail">Normal Stunna Push and Pull combined into one session. Maintenance only. Then add: lat pulldown 3×10, face pulls 3×15 for shoulder health. Don't kill yourself here.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-swim" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-swim" onclick="flipCard(this)">
           <div class="flip-card-inner">
             <div class="flip-front"><span class="flip-day">Friday</span><span class="flip-title">Open Water Prep</span><span class="flip-type">Swim</span></div>
-            <div class="flip-back"><span class="flip-day">Friday</span><span class="flip-detail">From June 2027 onward. Practice sighting, current navigation, wetsuit comfort.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-back"><span class="flip-day">Friday</span><span class="flip-detail">From June 2027 onward. Practice sighting, current navigation, wetsuit comfort. Before June: pool technique session 1,500–2,000m.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-combo" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-combo" onclick="flipCard(this)">
           <div class="flip-card-inner">
-            <div class="flip-front"><span class="flip-day">Saturday</span><span class="flip-title">Brick Workout</span><span class="flip-type">Combo</span></div>
-            <div class="flip-back"><span class="flip-day">Saturday</span><span class="flip-detail">90–120 min bike immediately into 20–30 min run. No rest between. Train the transition.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-front"><span class="flip-day">Saturday</span><span class="flip-title">Brick + Stunna Legs</span><span class="flip-type">Combo</span></div>
+            <div class="flip-back"><span class="flip-day">Saturday</span><span class="flip-detail">AM: Normal Stunna Legs day, then add: single-leg RDL 3×10, calf raises 4×20. PM: 90–120 min bike immediately into 20–30 min run. No rest between.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
-        <div class="flip-card type-run" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card type-run" onclick="flipCard(this)">
           <div class="flip-card-inner">
             <div class="flip-front"><span class="flip-day">Sunday</span><span class="flip-title">Long Run</span><span class="flip-type">Run</span></div>
-            <div class="flip-back"><span class="flip-day">Sunday</span><span class="flip-detail">Half marathon distance at easy pace. Aerobic base maintenance.</span><span class="flip-tap">tap to flip</span></div>
+            <div class="flip-back"><span class="flip-day">Sunday</span><span class="flip-detail">Half marathon distance at easy pace. Aerobic base maintenance for the run leg of Augusta.</span><span class="flip-tap">tap to flip</span></div>
           </div>
         </div>
       </div>
+      <p style="font-size:13px;color:var(--ink3);font-style:italic;margin-top:1rem">Deload every 3rd–4th week. Cut volume 30–40%. Non-negotiable.</p>
+      <p style="font-size:13px;color:var(--accent);font-style:italic;margin-top:0.5rem">Minimum 4–5 open water swims before Augusta race day. Start as soon as water permits in 2027.</p>
+    </div>
       <p style="font-size:13px;color:var(--ink3);font-style:italic;margin-top:1rem">Deload every 3rd–4th week. Cut volume 30–40%. Non-negotiable.</p>
       <p style="font-size:13px;color:var(--accent);font-style:italic;margin-top:0.5rem">Minimum 4–5 open water swims before race day. Start as soon as water permits in 2027.</p>
     </div>
@@ -947,6 +1059,11 @@ function switchSub(id, el, phase){
   parent.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'))
   document.getElementById(id).classList.add('active')
   el.classList.add('active')
+}
+
+// Flip cards
+function flipCard(card) {
+  card.classList.toggle('flipped')
 }
 </script>
 </body>

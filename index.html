@@ -84,10 +84,10 @@ nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px 
 .hero-card-bottom{font-size:15px;color:var(--cream);font-style:italic;font-family:var(--serif);text-align:center;line-height:1.6}
 
 /* MARQUEE */
-.marquee-bar{border-bottom:1px solid var(--border);padding:14px 0;overflow:hidden;white-space:nowrap}
-.marquee-inner{display:inline-flex;gap:3rem;animation:marquee 18s linear infinite}
-.marquee-item{font-size:12px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink3);display:flex;align-items:center;gap:12px}
-.marquee-dot{width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.marquee-bar{border-bottom:1px solid var(--border);padding:14px 0;overflow:hidden;white-space:nowrap;display:flex;align-items:center}
+.marquee-inner{display:inline-flex;gap:3rem;animation:marquee 18s linear infinite;align-items:center}
+.marquee-item{font-size:12px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink3);display:inline-flex;align-items:center;gap:12px;white-space:nowrap;line-height:1}
+.marquee-dot{width:4px;height:4px;border-radius:50%;background:var(--accent);display:inline-block;vertical-align:middle;flex-shrink:0}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* SECTIONS */
@@ -265,8 +265,8 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
           <div class="stat-label">Aggregate impressions, Stunnanomics</div>
         </div>
         <div>
-          <div class="stat-num">IO</div>
-          <div class="stat-label">Industrial organization working paper on Airbnb market entry</div>
+          <div class="stat-num">W.P.</div>
+          <div class="stat-label">Independent research · Industrial Organization</div>
         </div>
       </div>
       <div class="hero-card-divider"></div>
@@ -336,11 +336,11 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
       <div class="sidebar-block">
         <p class="sidebar-block-label">Awards & Certifications</p>
         <div class="sidebar-block-item">
-          <span>Beverly Rice Scholarship</span>
-        </div>
-        <div class="sidebar-block-item">
           <span>Founders Scholar</span>
           <span class="item-badge">2× Awarded</span>
+        </div>
+        <div class="sidebar-block-item">
+          <span>Beverly Rice Scholarship</span>
         </div>
         <div class="sidebar-block-item">
           <span>HIEP Grant Recipient</span>
@@ -515,20 +515,20 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
       </div>
       <div class="research-stats">
         <div class="r-stat">
-          <div class="r-stat-num">2</div>
-          <div class="r-stat-label">Key case markets studied</div>
+          <div class="r-stat-num">8–10%</div>
+          <div class="r-stat-label">Hotel revenue decline in high Airbnb penetration markets (Zervas et al.)</div>
         </div>
         <div class="r-stat">
-          <div class="r-stat-num">IO</div>
-          <div class="r-stat-label">Industrial organization framework</div>
+          <div class="r-stat-num">2</div>
+          <div class="r-stat-label">Case markets analyzed: Barcelona and New York</div>
         </div>
         <div class="r-stat">
           <div class="r-stat-num">AER</div>
-          <div class="r-stat-label">Farronato and Fradkin (2022)</div>
+          <div class="r-stat-label">Farronato and Fradkin (2022) anchor on consumer welfare gains</div>
         </div>
         <div class="r-stat">
-          <div class="r-stat-num">2017</div>
-          <div class="r-stat-label">Zervas et al. anchor study</div>
+          <div class="r-stat-num">0</div>
+          <div class="r-stat-label">Capital required for Airbnb supply entry vs. traditional hotel construction</div>
         </div>
       </div>
     </div>

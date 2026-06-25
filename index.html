@@ -87,7 +87,7 @@ nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px 
 .marquee-bar{border-bottom:1px solid var(--border);padding:14px 0;overflow:hidden;white-space:nowrap}
 .marquee-inner{display:inline-flex;gap:3rem;animation:marquee 18s linear infinite}
 .marquee-item{font-size:12px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink3);display:flex;align-items:center;gap:12px}
-.marquee-dot{width:4px;height:4px;border-radius:50%;background:var(--accent)}
+.marquee-dot{width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* SECTIONS */
@@ -265,8 +265,8 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
           <div class="stat-label">Aggregate impressions, Stunnanomics</div>
         </div>
         <div>
-          <div class="stat-num">41K+</div>
-          <div class="stat-label">Census tracts in current banking desert study</div>
+          <div class="stat-num">IO</div>
+          <div class="stat-label">Industrial organization working paper on Airbnb market entry</div>
         </div>
       </div>
       <div class="hero-card-divider"></div>
@@ -312,7 +312,7 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
   <div class="about-grid">
     <div class="about-text">
       <p>A junior at <strong>Indiana University's Kelley School of Business</strong>, triple-majoring in Economic Consulting, Business Analytics, and Sustainable Business. Focused on ESG, economics, policy, and business strategy.</p>
-      <p>Currently serving as a Business Analyst at <strong>Cribdata</strong>, a Barcelona-based startup building consent-first infrastructure for GDPR-compliant data acquisition, governance, and activation, and VP of Consulting at <strong>Nitara</strong>. Previously led Lighthouse Advisory, a cross-university pro bono consulting group. Conducting independent research on banking desert formation and the effectiveness of New Markets Tax Credit interventions, using difference-in-differences methodology and FDIC branch-level panel data across U.S. census tracts.</p>
+      <p>Currently serving as a Business Analyst at <strong>Cribdata</strong>, a Barcelona-based startup building consent-first infrastructure for GDPR-compliant data acquisition, governance, and activation, and VP of Consulting at <strong>Nitara</strong>. Previously led Lighthouse Advisory, a cross-university pro bono consulting group. Conducting independent research applying industrial organization frameworks to Airbnb's entry into local accommodation markets, examining how asset-light platform entry disciplines oligopolistic hotel pricing and generates consumer welfare gains.</p>
       <p>Founder of Do More Run Club at IU. Completed 3.5 marathons in one year including the LA Marathon. Volunteered at <strong>Nations Ministry Center</strong> in Nashville since 2022, returning every school break to tutor and mentor children from underserved communities.</p>
       <p>The thread across all of it is a simple mission: help build a world where businesses create lasting impact alongside strong returns. That means better decisions, more honest risk pricing, and firms that leave things better than they found them. Both my parents are physicians. Growing up watching them dedicate their lives to making people better shaped how I approach work. The goal is the same, just at the scale of institutions and policy.</p>
     </div>
@@ -337,7 +337,6 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
         <p class="sidebar-block-label">Awards & Certifications</p>
         <div class="sidebar-block-item">
           <span>Beverly Rice Scholarship</span>
-          <span class="item-badge">Awarded</span>
         </div>
         <div class="sidebar-block-item">
           <span>Founders Scholar</span>
@@ -488,48 +487,48 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
   <div class="research-card card-pop">
     <div>
       <div class="research-label">Working paper</div>
-      <h3 class="research-title">The <em>Retreat of Capital</em></h3>
-      <p class="research-body">Do market-based interventions reverse banking desert formation? This paper tests whether New Markets Tax Credit investment reduced banking desert prevalence across U.S. census tracts between 2010 and 2019, using a national branch-level panel geocoded from FDIC Summary of Deposits data and matched to NMTC project geographies.</p>
+      <h3 class="research-title">The <em>Airbnb Effect</em></h3>
+      <p class="research-body">An industrial organization analysis of Airbnb's entry into local accommodation markets, examining whether platform-enabled supply disrupted incumbent hotel pricing power and generated consumer welfare gains. Draws on structural econometric literature including Zervas et al. (2017) and Farronato and Fradkin (2022, AER) to build an evidence-based argument about how asset-light platform entry can discipline oligopolistic pricing without regulatory intervention.</p>
       <div class="research-meta">
         <div class="research-meta-item">
-          <span class="research-meta-label">Data</span>
-          <span class="research-meta-val">FDIC Summary of Deposits / Census ACS / NMTC Project Data</span>
+          <span class="research-meta-label">Framework</span>
+          <span class="research-meta-val">Industrial Organization</span>
         </div>
         <div class="research-meta-item">
           <span class="research-meta-label">Method</span>
-          <span class="research-meta-val">Difference-in-differences · OLS with clustered standard errors</span>
+          <span class="research-meta-val">Structural econometrics · Evidence synthesis</span>
         </div>
         <div class="research-meta-item">
-          <span class="research-meta-label">Period</span>
-          <span class="research-meta-val">2010 – 2019</span>
+          <span class="research-meta-label">Cases</span>
+          <span class="research-meta-val">Barcelona · New York</span>
         </div>
         <div class="research-meta-item">
           <span class="research-meta-label">Status</span>
-          <span class="research-meta-val">In progress</span>
+          <span class="research-meta-val">Working paper</span>
         </div>
       </div>
     </div>
     <div class="research-right">
       <div class="research-hypothesis">
-        <p class="research-hyp-label">Core hypothesis</p>
-        <p class="research-hyp-text">"Sustained multi-period NMTC investment reverses banking desert formation, while one-off allocations show no statistically significant effect. This suggests program design, not market mechanisms, limits intervention effectiveness."</p>
+        <p class="research-hyp-label">Core argument</p>
+        <p class="research-hyp-text">"By aggregating existing residential inventory rather than constructing dedicated supply, Airbnb eliminated the capital barrier that had historically insulated hotel incumbents from meaningful competition."</p>
       </div>
       <div class="research-stats">
         <div class="r-stat">
-          <div class="r-stat-num">41K+</div>
-          <div class="r-stat-label">Census tracts in sample</div>
+          <div class="r-stat-num">2</div>
+          <div class="r-stat-label">Key case markets studied</div>
         </div>
         <div class="r-stat">
-          <div class="r-stat-num">9yr</div>
-          <div class="r-stat-label">Time horizon studied</div>
+          <div class="r-stat-num">IO</div>
+          <div class="r-stat-label">Industrial organization framework</div>
         </div>
         <div class="r-stat">
-          <div class="r-stat-num">1,328</div>
-          <div class="r-stat-label">Net new banking deserts</div>
+          <div class="r-stat-num">AER</div>
+          <div class="r-stat-label">Farronato and Fradkin (2022)</div>
         </div>
         <div class="r-stat">
-          <div class="r-stat-num">NMTC</div>
-          <div class="r-stat-label">Treatment intensity measure</div>
+          <div class="r-stat-num">2017</div>
+          <div class="r-stat-label">Zervas et al. anchor study</div>
         </div>
       </div>
     </div>

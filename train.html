@@ -14,8 +14,8 @@
   --ink:#1A1714;
   --ink2:#4A4641;
   --ink3:#8A8480;
-  --accent:#192a55;
-  --accent2:#4a6fa5;
+  --accent:#382218;
+  --accent2:#bea48e;
   --border:rgba(26,23,20,0.12);
   --serif:'DM Serif Display',serif;
   --sans:'DM Sans',sans-serif;
@@ -44,10 +44,10 @@ nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px 
 .race-name{font-family:var(--serif);font-size:17px;letter-spacing:-0.3px;margin-bottom:auto;padding-bottom:1.25rem;transition:color 0.25s}
 .race-date{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:1.25rem;transition:color 0.25s}
 .race-phase{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem;transition:color 0.25s}
-.countdown-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:auto}
-.countdown-block{text-align:center;padding:8px 4px;background:rgba(25,42,85,0.04);border-radius:3px;transition:background 0.25s;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.countdown-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;width:100%;margin-top:auto}
+.countdown-block{min-width:0;overflow:hidden;text-align:center;padding:8px 3px;background:rgba(56,34,24,0.04);border-radius:3px;transition:background 0.25s;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .race-card:hover .countdown-block{background:rgba(247,244,239,0.08)}
-.countdown-num{font-family:var(--serif);font-size:28px;color:var(--accent);line-height:1;display:block;transition:color 0.25s}
+.countdown-num{width:100%;font-family:var(--serif);font-size:clamp(20px,1.75vw,28px);font-variant-numeric:tabular-nums;text-align:center;color:var(--accent);line-height:1;display:block;transition:color 0.25s}
 .countdown-label{font-size:9px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-top:3px;display:block;transition:color 0.25s}
 @media(max-width:768px){
   .race-grid{grid-template-columns:1fr 1fr}
@@ -96,8 +96,8 @@ nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px 
 .flip-tap{font-size:9px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;opacity:0.5;margin-top:auto}
 
 /* Color codes */
-.type-run .flip-front{background:#192a55;color:#F7F4EF}
-.type-run .flip-back{background:#192a55;color:#F7F4EF}
+.type-run .flip-front{background:#382218;color:#F7F4EF}
+.type-run .flip-back{background:#382218;color:#F7F4EF}
 .type-swim .flip-front{background:#0e6b8a;color:#F7F4EF}
 .type-swim .flip-back{background:#0e6b8a;color:#F7F4EF}
 .type-bike .flip-front{background:#1a6b3a;color:#F7F4EF}
@@ -114,7 +114,7 @@ nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px 
 .week-legend-instruction{font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);width:100%;margin-bottom:4px}
 .legend-item{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3)}
 .legend-dot{width:10px;height:10px;border-radius:2px}
-.dot-run{background:#192a55}
+.dot-run{background:#382218}
 .dot-swim{background:#0e6b8a}
 .dot-bike{background:#1a6b3a}
 .dot-strength{background:#6b2d6b}
@@ -140,7 +140,7 @@ nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px 
 
 .rules-list{display:flex;flex-direction:column;gap:0}
 .rule-item{display:flex;align-items:flex-start;gap:1.5rem;padding:1.25rem 0;border-bottom:1px solid var(--border)}
-.rule-num{font-family:var(--serif);font-size:24px;color:rgba(25,42,85,0.15);min-width:32px;line-height:1}
+.rule-num{font-family:var(--serif);font-size:24px;color:rgba(56,34,24,0.15);min-width:32px;line-height:1}
 .rule-text{font-size:15px;color:var(--ink2);line-height:1.7;font-weight:300}
 
 footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border)}
@@ -307,42 +307,42 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
           </tr></thead>
           <tbody>
             <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Easy (E)</span></td>
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#382218">Easy (E)</span></td>
               <td style="padding:9px 12px;font-weight:500;color:var(--ink)">10:15 – 10:45</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Full conversation</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Mon + Thu</td>
               <td style="padding:9px 0;color:var(--ink2);font-weight:300">Aerobic base, recovery</td>
             </tr>
-            <tr style="border-bottom:1px solid var(--border);background:rgba(25,42,85,0.02)">
-              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Long (L)</span></td>
+            <tr style="border-bottom:1px solid var(--border);background:rgba(56,34,24,0.02)">
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#382218">Long (L)</span></td>
               <td style="padding:9px 12px;font-weight:500;color:var(--ink)">10:00 – 10:30</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Comfortable, short sentences</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Sat first 80%</td>
               <td style="padding:9px 0;color:var(--ink2);font-weight:300">Endurance, fat oxidation</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Marathon (M)</span></td>
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#382218">Marathon (M)</span></td>
               <td style="padding:9px 12px;font-weight:500;color:var(--ink)">8:15 – 8:30</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Controlled hard, race effort</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Sat final 3–4 mi</td>
               <td style="padding:9px 0;color:var(--ink2);font-weight:300">Race rehearsal, pacing</td>
             </tr>
-            <tr style="border-bottom:1px solid var(--border);background:rgba(25,42,85,0.02)">
-              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Threshold (T)</span></td>
+            <tr style="border-bottom:1px solid var(--border);background:rgba(56,34,24,0.02)">
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#382218">Threshold (T)</span></td>
               <td style="padding:9px 12px;font-weight:500;color:var(--ink)">8:40 – 8:55</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Comfortably hard, short phrases</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Wed every week</td>
               <td style="padding:9px 0;color:var(--ink2);font-weight:300">Lactate threshold. Biggest PR lever</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Interval (I)</span></td>
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#382218">Interval (I)</span></td>
               <td style="padding:9px 12px;font-weight:500;color:var(--ink)">8:15 – 8:30</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Hard, 2–3 words max</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Tue 800m repeats</td>
               <td style="padding:9px 0;color:var(--ink2);font-weight:300">VO2max development</td>
             </tr>
             <tr>
-              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Strides (R)</span></td>
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#382218">Strides (R)</span></td>
               <td style="padding:9px 12px;font-weight:500;color:var(--ink)">7:00 – 7:30</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Fast, controlled, 20 sec</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">After Mon + Thu</td>
@@ -485,42 +485,42 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
           </tr></thead>
           <tbody>
             <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Easy (E)</span></td>
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#382218">Easy (E)</span></td>
               <td style="padding:9px 12px;font-weight:500;color:var(--ink)">10:15 – 10:45</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Full conversation</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Mon + Thu</td>
               <td style="padding:9px 0;color:var(--ink2);font-weight:300">Aerobic base, recovery</td>
             </tr>
-            <tr style="border-bottom:1px solid var(--border);background:rgba(25,42,85,0.02)">
-              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Long (L)</span></td>
+            <tr style="border-bottom:1px solid var(--border);background:rgba(56,34,24,0.02)">
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#382218">Long (L)</span></td>
               <td style="padding:9px 12px;font-weight:500;color:var(--ink)">10:00 – 10:30</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Comfortable, short sentences</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Sat first 80%</td>
               <td style="padding:9px 0;color:var(--ink2);font-weight:300">Endurance, fat oxidation</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Marathon (M)</span></td>
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#382218">Marathon (M)</span></td>
               <td style="padding:9px 12px;font-weight:500;color:var(--ink)">8:15 – 8:30</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Controlled hard, race effort</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Sat final 3–4 mi</td>
               <td style="padding:9px 0;color:var(--ink2);font-weight:300">Race rehearsal, pacing</td>
             </tr>
-            <tr style="border-bottom:1px solid var(--border);background:rgba(25,42,85,0.02)">
-              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Threshold (T)</span></td>
+            <tr style="border-bottom:1px solid var(--border);background:rgba(56,34,24,0.02)">
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#382218">Threshold (T)</span></td>
               <td style="padding:9px 12px;font-weight:500;color:var(--ink)">8:40 – 8:55</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Comfortably hard, short phrases</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Wed every week</td>
               <td style="padding:9px 0;color:var(--ink2);font-weight:300">Lactate threshold. Biggest PR lever</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Interval (I)</span></td>
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#382218">Interval (I)</span></td>
               <td style="padding:9px 12px;font-weight:500;color:var(--ink)">8:15 – 8:30</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Hard, 2–3 words max</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Tue 800m repeats</td>
               <td style="padding:9px 0;color:var(--ink2);font-weight:300">VO2max development</td>
             </tr>
             <tr>
-              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Strides (R)</span></td>
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#382218">Strides (R)</span></td>
               <td style="padding:9px 12px;font-weight:500;color:var(--ink)">7:00 – 7:30</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Fast, controlled, 20 sec</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">After Mon + Thu</td>
@@ -656,42 +656,42 @@ footer{padding:3rem 5vw;display:flex;align-items:center;justify-content:space-be
           </tr></thead>
           <tbody>
             <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Easy (E)</span></td>
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#382218">Easy (E)</span></td>
               <td style="padding:9px 12px;font-weight:500;color:var(--ink)">10:15 – 10:45</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Full conversation</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Mon + Thu</td>
               <td style="padding:9px 0;color:var(--ink2);font-weight:300">Aerobic base, recovery</td>
             </tr>
-            <tr style="border-bottom:1px solid var(--border);background:rgba(25,42,85,0.02)">
-              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Long (L)</span></td>
+            <tr style="border-bottom:1px solid var(--border);background:rgba(56,34,24,0.02)">
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#382218">Long (L)</span></td>
               <td style="padding:9px 12px;font-weight:500;color:var(--ink)">10:00 – 10:30</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Comfortable, short sentences</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Sat first 80%</td>
               <td style="padding:9px 0;color:var(--ink2);font-weight:300">Endurance, fat oxidation</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Marathon (M)</span></td>
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#382218">Marathon (M)</span></td>
               <td style="padding:9px 12px;font-weight:500;color:var(--ink)">8:15 – 8:30</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Controlled hard, race effort</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Sat final 3–4 mi</td>
               <td style="padding:9px 0;color:var(--ink2);font-weight:300">Race rehearsal, pacing</td>
             </tr>
-            <tr style="border-bottom:1px solid var(--border);background:rgba(25,42,85,0.02)">
-              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Threshold (T)</span></td>
+            <tr style="border-bottom:1px solid var(--border);background:rgba(56,34,24,0.02)">
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#382218">Threshold (T)</span></td>
               <td style="padding:9px 12px;font-weight:500;color:var(--ink)">8:40 – 8:55</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Comfortably hard, short phrases</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Wed every week</td>
               <td style="padding:9px 0;color:var(--ink2);font-weight:300">Lactate threshold. Biggest PR lever</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Interval (I)</span></td>
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#382218">Interval (I)</span></td>
               <td style="padding:9px 12px;font-weight:500;color:var(--ink)">8:15 – 8:30</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Hard, 2–3 words max</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Tue 800m repeats</td>
               <td style="padding:9px 0;color:var(--ink2);font-weight:300">VO2max development</td>
             </tr>
             <tr>
-              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#192a55">Strides (R)</span></td>
+              <td style="padding:9px 12px 9px 0"><span style="font-family:var(--serif);font-size:14px;color:#382218">Strides (R)</span></td>
               <td style="padding:9px 12px;font-weight:500;color:var(--ink)">7:00 – 7:30</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">Fast, controlled, 20 sec</td>
               <td style="padding:9px 12px;color:var(--ink2);font-weight:300">After Mon + Thu</td>
